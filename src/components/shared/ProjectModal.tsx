@@ -3,7 +3,8 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Github, ExternalLink, ArrowLeft } from 'lucide-react';
+import { X, ExternalLink, ArrowLeft } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 import type { Project } from '@/types';
 
 const categoryColors: Record<string, string> = {
@@ -125,7 +126,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 text-xs text-[#a1a1aa] hover:text-white border border-[#262626] hover:border-[#a1a1aa]/50 px-3 py-1.5 rounded-lg transition-all"
                       >
-                        <Github className="w-3.5 h-3.5" /> GitHub
+                        <FaGithub className="w-3.5 h-3.5" /> GitHub
                       </a>
                     )}
                     {project.liveUrl && (
