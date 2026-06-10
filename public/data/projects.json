@@ -1,0 +1,233 @@
+[
+  {
+    "slug": "spendwise",
+    "title": "SpendWise",
+    "tagline": "Predicts personal spending patterns using machine learning and flags anomalies in real time.",
+    "description": "An AI-powered personal finance platform that combines expense tracking with machine learning to deliver spending predictions, anomaly detection, and personalized budget recommendations.",
+    "longDescription": "SpendWise is a full-stack personal finance management system built around an ML prediction core. The React Native mobile app connects to a FastAPI backend that routes requests through Redis for cache-first reads, with PostgreSQL as the persistent store.\n\nThe prediction engine uses a multi-model ensemble: TensorFlow handles sequential spending forecasts across time series data, Prophet models seasonal and weekly patterns, and Scikit-learn provides the anomaly detection classifier. The three models vote on anomaly confidence, with results cached in Redis so repeat requests for identical expense windows are served in under 10ms without touching the ML layer.\n\nJWT-based authentication with role-level access control protects all endpoints. The analytics dashboard renders interactive charts of historical spending, predicted future expenses, and category breakdowns — giving users a clear picture of where their money goes and where it's likely to go.",
+    "category": ["AI/ML", "Mobile", "Backend"],
+    "featured": true,
+    "technologies": ["FastAPI", "PostgreSQL", "Redis", "TensorFlow", "Scikit-learn", "Prophet", "React Native"],
+    "highlights": [
+      "Multi-model ML ensemble (TensorFlow + Prophet + Scikit-learn) for spending prediction",
+      "Real-time anomaly detection with sub-200ms response times via Redis caching",
+      "JWT-based authentication with role-level access control",
+      "Expense categorization with ML-powered auto-tagging",
+      "Interactive analytics dashboard with spending forecasts and budget recommendations"
+    ],
+    "architecture": "React Native App\n      │  REST\n      ▼\nFastAPI Backend ─── Redis Cache\n      │\n  PostgreSQL\n      │\nML Prediction Engine\n(TensorFlow + Prophet + Scikit-learn)",
+    "challenges": [
+      "Coordinating three ML models with different inference latencies into a unified prediction API without blocking the user response cycle",
+      "Designing a caching strategy that invalidates Redis entries correctly when a user adds a new expense that would affect prior predictions",
+      "Handling cold-start users who have insufficient transaction history for the time-series models to produce meaningful predictions"
+    ],
+    "lessonsLearned": [
+      "Redis cache invalidation requires a disciplined key strategy — encoding the user ID, date window, and model version in the cache key prevents stale predictions",
+      "Prophet is excellent at seasonal patterns but needs at least 2 full cycles of data before its forecasts become trustworthy",
+      "Building the anomaly classifier as a separate service rather than embedding it in the prediction API made A/B testing model improvements significantly easier"
+    ],
+    "githubUrl": "https://github.com/nilanga/spendwise",
+    "coverImage": "/images/projects/spendwise.png",
+    "year": 2026
+  },
+  {
+    "slug": "traceiq",
+    "title": "TraceIQ",
+    "tagline": "Enables law enforcement agencies to identify suspects through facial recognition integrated with criminal record workflows.",
+    "description": "A criminal identification platform combining facial recognition technology with Domain-Driven Design architecture, built for law enforcement agencies that need fast, auditable suspect matching against criminal databases.",
+    "longDescription": "TraceIQ solves the operational gap between facial recognition capability and practical investigative workflow. The FastAPI backend is structured using Domain-Driven Design — entities, aggregates, repositories, and domain services are cleanly separated from the infrastructure layer, making the system auditable and testable without touching the recognition engine.\n\nThe facial recognition pipeline processes uploaded images through a preprocessing stage that normalises lighting and orientation, then passes them to the recognition engine which returns ranked matches with confidence scores. Each match attempt is immutably logged with the initiating officer's credentials, the timestamp, and the confidence threshold used — providing a complete audit trail for evidentiary chain-of-custody requirements.\n\nThe frontend, built with React and managed via Zustand, provides investigation workflow tools: create a case, attach images, run recognition, review matches, and update the criminal record — all from a single interface. The DDD boundary between the Case aggregate and the CriminalRecord aggregate means neither can corrupt the other's invariants.",
+    "category": ["AI/ML", "Backend", "Enterprise"],
+    "featured": true,
+    "technologies": ["FastAPI", "Python", "Zustand", "React", "PostgreSQL", "Face Recognition"],
+    "highlights": [
+      "Facial recognition pipeline with confidence-scored ranked matches",
+      "Domain-Driven Design architecture with clean bounded contexts",
+      "Immutable audit trail for all recognition attempts and case actions",
+      "Investigation workflow: case creation, image attachment, suspect review",
+      "Role-based access control separating officers, supervisors, and admins"
+    ],
+    "architecture": "React Frontend (Zustand)\n      │\n      ▼\n  FastAPI\n      │\n  DDD Layers\n  (Cases / Records / Recognition)\n      │\n  Face Recognition Engine\n      │\n  PostgreSQL",
+    "challenges": [
+      "Maintaining clean DDD boundaries when the facial recognition library is an imperative, side-effectful Python library that doesn't map cleanly to domain services",
+      "Designing the audit log such that it cannot be modified or deleted even by administrator accounts",
+      "Handling false positive matches in a domain where incorrectly identifying a suspect has serious real-world consequences"
+    ],
+    "lessonsLearned": [
+      "DDD's anti-corruption layer pattern is genuinely useful for wrapping third-party libraries — it isolates messy external APIs behind a clean domain interface",
+      "Write-once audit tables enforced at the database level (append-only partitioned tables with no DELETE permissions) are more trustworthy than application-level protections",
+      "Confidence thresholds for facial recognition must be configurable per use case — a missing-person search should tolerate lower confidence than a high-security verification"
+    ],
+    "githubUrl": "https://github.com/nilanga/traceiq",
+    "coverImage": "/images/projects/traceiq.png",
+    "year": 2025
+  },
+  {
+    "slug": "warehouse-management",
+    "title": "Warehouse Management System",
+    "tagline": "Manages multi-warehouse inventory with real-time geospatial tracking, route optimisation, and exportable analytics.",
+    "description": "An enterprise logistics platform providing real-time inventory tracking, geospatial warehouse visualisation using Leaflet maps, route optimisation for deliveries, and one-click PDF/Excel exports for reporting.",
+    "longDescription": "The Warehouse Management System was built to replace a spreadsheet-based workflow at a multi-site logistics operation. The React frontend provides an interactive Leaflet map showing all warehouse locations and their inventory levels in real time. Clicking a warehouse reveals its stock levels, low-stock alerts, and incoming/outgoing shipment queue.\n\nThe Node.js/Express backend exposes a RESTful API with JWT authentication and three role levels: warehouse staff (read + update their site), logistics managers (cross-site visibility and route planning), and admins (full system access). MongoDB stores inventory documents with a flexible schema that accommodates the different product categories across sites.\n\nRoute optimisation uses a nearest-neighbour heuristic to suggest efficient delivery sequences from a given warehouse to a set of delivery addresses. The reporting module generates formatted PDFs and Excel workbooks on demand — daily inventory snapshots, movement summaries, and low-stock exception reports.",
+    "category": ["Backend", "Frontend", "Enterprise"],
+    "featured": true,
+    "technologies": ["React", "Node.js", "Express", "MongoDB", "Leaflet", "JWT"],
+    "highlights": [
+      "Interactive Leaflet map with real-time inventory levels across all warehouse locations",
+      "Three-tier RBAC: warehouse staff, logistics managers, and admins",
+      "Route optimisation for delivery sequencing from any warehouse",
+      "One-click PDF and Excel export for inventory reports and movement summaries",
+      "Low-stock alert system with configurable thresholds per product category"
+    ],
+    "architecture": "React + Leaflet\n      │\n  Express/Node.js API\n      │\n    MongoDB\n      │\n  Analytics Layer\n  (Reports / Exports)",
+    "challenges": [
+      "Leaflet map performance with hundreds of warehouse markers and real-time stock level overlays",
+      "Designing a MongoDB schema flexible enough for different product categories while still supporting efficient range queries on stock levels"
+    ],
+    "lessonsLearned": [
+      "Clustering map markers at low zoom levels is non-negotiable once you have more than ~50 points — Leaflet's MarkerCluster plugin solved this cleanly",
+      "A denormalised MongoDB schema optimised for reads made the inventory queries fast but required careful event-sourced writes to keep data consistent across locations"
+    ],
+    "githubUrl": "https://github.com/nilanga/warehouse-management",
+    "coverImage": "/images/projects/warehouse-management.png",
+    "year": 2024
+  },
+  {
+    "slug": "edumanager",
+    "title": "EduManager",
+    "tagline": "Centralises student, course, and performance management for educational institutions with full CI/CD automation.",
+    "description": "A modern educational administration platform built with Spring Boot and React, providing student lifecycle management, course assignment, academic performance tracking, and a fully automated CI/CD pipeline via GitHub Actions.",
+    "longDescription": "EduManager was built to address the fragmented data management problem in educational institutions — student records in one system, courses in another, grades in spreadsheets. The platform consolidates all three into a single React TypeScript frontend backed by a Spring Boot REST API.\n\nThe backend uses Spring Security for authentication and authorisation, with three roles: students (view their own records), instructors (manage their courses and grade students), and administrators (full system access). MySQL stores the relational data — students, courses, enrolments, grades — with JPA/Hibernate handling the ORM layer.\n\nDocker containers are used for both local development and production deployment, ensuring environment parity. GitHub Actions runs the CI/CD pipeline on every push: build, test, Docker image build, and deploy to the target environment. The pipeline catches compilation errors and failing tests before they reach production.",
+    "category": ["Enterprise", "Backend", "Frontend"],
+    "featured": true,
+    "technologies": ["Spring Boot", "Java", "React", "TypeScript", "MySQL", "Docker", "GitHub Actions"],
+    "highlights": [
+      "Spring Security RBAC with student, instructor, and admin roles",
+      "Full CI/CD pipeline via GitHub Actions: build, test, containerise, deploy",
+      "Academic performance tracking with grade history and GPA calculation",
+      "Docker Compose for local development with production-parity containers",
+      "RESTful API with comprehensive Swagger/OpenAPI documentation"
+    ],
+    "architecture": "React TypeScript\n      │\n  Spring Boot API\n  (Spring Security)\n      │\n    MySQL\n      │\n  GitHub Actions CI/CD\n  → Docker → Production",
+    "challenges": [
+      "Spring Security configuration for a three-role system where permissions overlap — instructors can see their own students' records but not other instructors' students"
+    ],
+    "lessonsLearned": [
+      "GitHub Actions dramatically simplifies CI/CD for Java projects once you have the Maven caching configured correctly — cold builds went from 4 minutes to under 90 seconds"
+    ],
+    "githubUrl": "https://github.com/nilanga/edumanager",
+    "coverImage": "/images/projects/edumanager.png",
+    "year": 2025
+  },
+  {
+    "slug": "storymancer",
+    "title": "StoryMancer",
+    "tagline": "Recommends stories semantically based on natural language descriptions using vector embeddings and LangChain.",
+    "description": "An AI-powered story recommendation engine that converts natural language descriptions into vector embeddings, searches a ChromaDB vector store for semantically similar stories, and returns ranked recommendations via a Gradio interface.",
+    "longDescription": "StoryMancer demonstrates how modern AI engineering tools — LangChain, vector databases, and embedding models — can solve a traditionally hard recommendation problem: finding stories that feel similar to a description, not just ones that share keywords.\n\nUsers describe what they want in natural language ('a story about redemption set in a dystopian future with a morally grey protagonist'). LangChain orchestrates the pipeline: the description is embedded using OpenAI's text-embedding model, the resulting vector is used to query ChromaDB with cosine similarity, and the top-k matches are re-ranked using a second LLM call that considers narrative theme alignment, not just vector distance.\n\nThe Gradio interface makes the system immediately usable without frontend development. The ChromaDB vector store is pre-populated with embeddings for a corpus of stories and updated incrementally as new content is added.",
+    "category": ["AI/ML"],
+    "featured": true,
+    "technologies": ["LangChain", "ChromaDB", "OpenAI Embeddings", "Transformers", "Gradio", "Python"],
+    "highlights": [
+      "Semantic search using OpenAI vector embeddings + ChromaDB cosine similarity",
+      "LangChain pipeline with two-stage retrieval: vector search + LLM re-ranking",
+      "Natural language query interface — no structured input required",
+      "Incremental vector store updates without full re-indexing",
+      "Gradio frontend for immediate usability without custom UI development"
+    ],
+    "architecture": "Gradio Interface\n      │\n  LangChain Pipeline\n      │\n  OpenAI Embeddings\n      │\n    ChromaDB\n  (Vector Store)\n      │\n  LLM Re-ranking",
+    "challenges": [
+      "Two-stage retrieval (vector search + LLM re-ranking) adds latency — caching the embedding for repeated queries brought P90 latency from 4s to under 1s for warm requests"
+    ],
+    "lessonsLearned": [
+      "LLM re-ranking after vector retrieval meaningfully improves recommendation quality for narrative content because story themes don't compress well into vectors alone"
+    ],
+    "githubUrl": "https://github.com/nilanga/storymancer",
+    "coverImage": "/images/projects/storymancer.png",
+    "year": 2026
+  },
+  {
+    "slug": "villageconnect",
+    "title": "VillageConnect",
+    "tagline": "Connects citizens with local government offices through a mobile platform for service requests and civic communication.",
+    "description": "A digital governance platform built with Flutter and Firebase that improves communication between citizens and local government offices, enabling service requests, status tracking, and community announcements.",
+    "category": ["Mobile"],
+    "featured": false,
+    "technologies": ["Flutter", "Dart", "Firebase", "Riverpod"],
+    "highlights": [
+      "Citizen service request submission and real-time status tracking",
+      "Push notification system for government announcements",
+      "Offline-capable architecture with Firebase sync on reconnect",
+      "Riverpod state management for reactive UI updates"
+    ],
+    "githubUrl": "https://github.com/nilanga/villageconnect",
+    "coverImage": "/images/projects/villageconnect.png",
+    "year": 2024
+  },
+  {
+    "slug": "moviemind",
+    "title": "MovieMind",
+    "tagline": "Recommends films using a hybrid collaborative and content-based filtering approach trained on user rating history.",
+    "description": "A movie recommendation system implementing both collaborative filtering (user-item matrix factorisation) and content-based filtering (genre, director, cast embeddings), combined into a hybrid model for higher accuracy.",
+    "category": ["AI/ML", "Academic"],
+    "featured": false,
+    "technologies": ["Python", "Scikit-learn", "Pandas", "NumPy"],
+    "highlights": [
+      "Hybrid recommendation model combining collaborative and content-based filtering",
+      "Matrix factorisation for user-item preference modelling",
+      "Cold-start handling for new users via content-based fallback"
+    ],
+    "githubUrl": "https://github.com/nilanga/moviemind",
+    "coverImage": "/images/projects/moviemind.png",
+    "year": 2023
+  },
+  {
+    "slug": "motormart",
+    "title": "MotorMart",
+    "tagline": "A vehicle auction marketplace where buyers bid in real time and sellers manage listings through an ASP.NET Core backend.",
+    "description": "A vehicle auction platform with real-time bidding, listing management, and a React frontend backed by an ASP.NET Core API connected to MySQL.",
+    "category": ["Backend", "Frontend"],
+    "featured": false,
+    "technologies": ["React", "ASP.NET Core", "C#", "MySQL"],
+    "highlights": [
+      "Real-time auction bidding with WebSocket updates",
+      "Seller listing management with image uploads",
+      "Bid history and auction countdown timers"
+    ],
+    "githubUrl": "https://github.com/nilanga/motormart",
+    "coverImage": "/images/projects/motormart.png",
+    "year": 2024
+  },
+  {
+    "slug": "grade-predictor",
+    "title": "Student Grade Predictor",
+    "tagline": "Predicts academic performance using regression models trained on attendance, assignment scores, and prior grades.",
+    "description": "A machine learning system that predicts student end-of-term grades using linear regression and feature engineering over academic input data.",
+    "category": ["AI/ML", "Academic"],
+    "featured": false,
+    "technologies": ["Python", "Scikit-learn", "Pandas", "Linear Regression"],
+    "highlights": [
+      "Feature engineering from attendance, assignment, and midterm scores",
+      "Multiple regression models with cross-validation and RMSE comparison",
+      "Visual performance analysis with predicted vs actual grade plots"
+    ],
+    "githubUrl": "https://github.com/nilanga/grade-predictor",
+    "coverImage": "/images/projects/grade-predictor.png",
+    "year": 2023
+  },
+  {
+    "slug": "eventgo",
+    "title": "EventGo",
+    "tagline": "A collaborative event discovery and management platform where organisers publish events and attendees RSVP in real time.",
+    "description": "A Next.js event platform enabling organisers to create and manage events, and attendees to browse, filter, and RSVP with real-time seat availability updates.",
+    "category": ["Frontend"],
+    "featured": false,
+    "technologies": ["Next.js", "TypeScript", "Tailwind CSS"],
+    "highlights": [
+      "Event discovery with category and date filters",
+      "Organiser dashboard for event creation and attendee management",
+      "Real-time RSVP with seat availability counter"
+    ],
+    "githubUrl": "https://github.com/nilanga/eventgo",
+    "coverImage": "/images/projects/eventgo.png",
+    "year": 2023
+  }
+]

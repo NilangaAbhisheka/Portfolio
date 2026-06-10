@@ -1,0 +1,524 @@
+This is the information I'd use as the source of truth when building your portfolio website.
+
+# Personal Profile
+
+## Name
+
+**Nilanga Abhisheka Muthukumarana**
+
+## Current Status
+
+* Undergraduate in Computer Science
+* Software Engineer Aspirant
+* Full-Stack Developer
+* AI/ML Enthusiast
+
+## Professional Summary
+
+I am a Computer Science undergraduate with a strong passion for building scalable software solutions across web, mobile, and artificial intelligence domains. My experience spans full-stack development, machine learning, recommendation systems, enterprise software, and modern software architecture.
+
+I have designed and developed projects using React, Spring Boot, FastAPI, Node.js, Flutter, PostgreSQL, MongoDB, and various AI/ML technologies. My work focuses on solving real-world problems through intelligent systems, data-driven applications, and user-centric software design.
+
+I enjoy working on challenging projects involving backend engineering, system architecture, machine learning, recommendation systems, and modern development practices. I continuously explore new technologies while strengthening my foundation in software engineering principles, scalable architectures, and cloud-ready application development.
+
+---
+
+# Portfolio Positioning
+
+If someone visits your website, they should immediately understand:
+
+> "This is a Computer Science student with unusually broad experience in Full-Stack Development, AI/ML, Mobile Development, and Enterprise Software Engineering."
+
+Your portfolio is not a typical student portfolio.
+
+Most students have:
+
+* 2–3 CRUD applications
+
+You have:
+
+* Enterprise systems
+* Recommendation engines
+* Mobile apps
+* AI projects
+* Computer vision systems
+* Financial prediction systems
+* Government digitization platforms
+
+That distinction should be visible.
+
+---
+
+# Core Expertise
+
+## Software Engineering
+
+* Object-Oriented Programming
+* Software Architecture
+* Design Patterns
+* Domain-Driven Design
+* REST API Development
+* Authentication & Authorization
+* Database Design
+* System Design
+
+---
+
+## Frontend Development
+
+### Technologies
+
+* React
+* TypeScript
+* JavaScript
+* Next.js
+* Tailwind CSS
+* Material UI
+* NextUI
+* React Router
+* React Query
+* Redux Toolkit
+* Context API
+
+### Experience
+
+* Enterprise dashboards
+* Data visualization
+* Administrative systems
+* Event management systems
+* Finance applications
+
+---
+
+## Backend Development
+
+### Technologies
+
+* Node.js
+* Express.js
+* FastAPI
+* Spring Boot
+* ASP.NET Core
+
+### Skills
+
+* RESTful APIs
+* Authentication Systems
+* Authorization
+* API Documentation
+* Validation
+* Logging
+* Testing
+
+---
+
+## Mobile Development
+
+### Technologies
+
+* Flutter
+* Dart
+* React Native
+* Expo
+
+### Experience
+
+* Government service applications
+* Finance applications
+
+---
+
+## Databases
+
+### SQL
+
+* PostgreSQL
+* MySQL
+
+### NoSQL
+
+* MongoDB
+
+### Specialized Databases
+
+* Redis
+* ChromaDB
+
+### Skills
+
+* Database Design
+* Query Optimization
+* ORM Usage
+* Data Modeling
+
+---
+
+## Artificial Intelligence & Machine Learning
+
+### Machine Learning
+
+* Scikit-Learn
+* TensorFlow
+* Prophet
+
+### AI Engineering
+
+* OpenAI Embeddings
+* LangChain
+* Vector Databases
+* Semantic Search
+
+### Areas
+
+* Recommendation Systems
+* Predictive Analytics
+* Forecasting
+* Classification
+* Regression
+* Anomaly Detection
+
+---
+
+## DevOps & Engineering Practices
+
+### Tools
+
+* Docker
+* Docker Compose
+* GitHub Actions
+* Git
+* GitHub
+
+### Practices
+
+* CI/CD
+* Automated Testing
+* Containerization
+* Code Quality Analysis
+
+---
+
+# Technical Skills Matrix
+
+## Languages
+
+### Strong
+
+* JavaScript
+* TypeScript
+* Python
+* Java
+* SQL
+
+### Working Knowledge
+
+* C#
+* Dart
+
+---
+
+## Frameworks
+
+### Frontend
+
+* React
+* Next.js
+* React Native
+* Flutter
+
+### Backend
+
+* Express.js
+* FastAPI
+* Spring Boot
+* ASP.NET Core
+
+---
+
+## Databases
+
+* PostgreSQL
+* MongoDB
+* MySQL
+* Redis
+* ChromaDB
+
+---
+
+## AI & ML
+
+* TensorFlow
+* Scikit-Learn
+* Prophet
+* LangChain
+* OpenAI Embeddings
+
+---
+
+# Major Projects
+
+## 1. TraceIQ
+
+### Intelligent Criminal Identification System
+
+#### Description
+
+A criminal identification platform designed for law enforcement agencies combining facial recognition technology with criminal record management.
+
+#### Highlights
+
+* Facial recognition integration
+* Domain-Driven Design architecture
+* FastAPI backend
+* Modern frontend architecture
+* Scalable service layer
+
+#### Technologies
+
+* FastAPI
+* Python
+* DDD
+* Zustand
+* REST APIs
+
+#### Why It Matters
+
+Demonstrates advanced software architecture and real-world problem solving.
+
+---
+
+## 2. SpendWise
+
+### AI-Powered Personal Finance Platform
+
+#### Description
+
+A finance management system that leverages machine learning to provide spending predictions, anomaly detection, and personalized budgeting.
+
+#### Features
+
+* Expense categorization
+* Spending forecasting
+* Budget recommendations
+* Transaction anomaly detection
+
+#### Technologies
+
+* FastAPI
+* PostgreSQL
+* Redis
+* TensorFlow
+* Scikit-Learn
+* Prophet
+* React Native
+
+#### Why It Matters
+
+Combines software engineering, data engineering, and machine learning.
+
+---
+
+## 3. EduManager
+
+### Student Management System
+
+#### Description
+
+A modern educational administration platform.
+
+#### Features
+
+* Student management
+* Course management
+* Academic performance tracking
+* Authentication & authorization
+
+#### Technologies
+
+* Spring Boot
+* Java
+* React
+* MySQL
+* Docker
+* GitHub Actions
+
+#### Why It Matters
+
+Showcases enterprise-level software development.
+
+---
+
+## 4. Warehouse Management System
+
+#### Description
+
+A logistics and inventory management platform supporting inventory tracking, geospatial routing, reporting, and analytics.
+
+#### Features
+
+* Inventory management
+* Route optimization
+* PDF reporting
+* Excel exports
+* Geospatial visualization
+
+#### Technologies
+
+* React
+* Express
+* MongoDB
+* Leaflet
+* JWT
+
+#### Why It Matters
+
+Demonstrates large-scale full-stack engineering.
+
+---
+
+## 5. StoryMancer
+
+### AI Story Recommendation System
+
+#### Description
+
+An AI-powered semantic recommendation platform that suggests stories based on natural language descriptions.
+
+#### Technologies
+
+* LangChain
+* ChromaDB
+* OpenAI Embeddings
+* Transformers
+* Gradio
+
+#### Why It Matters
+
+Shows practical use of modern AI technologies.
+
+---
+
+## 6. VillageConnect
+
+#### Description
+
+A digital governance platform designed to improve communication between citizens and local government offices.
+
+#### Technologies
+
+* Flutter
+* Firebase
+* Riverpod
+
+---
+
+## 7. MovieMind
+
+#### Description
+
+A recommendation system using collaborative and content-based filtering.
+
+#### Technologies
+
+* Python
+* Machine Learning
+* Recommendation Algorithms
+
+---
+
+## 8. MotorMart
+
+#### Description
+
+A vehicle auction marketplace platform.
+
+#### Technologies
+
+* React
+* ASP.NET Core
+* MySQL
+
+---
+
+## 9. Student Grade Predictor
+
+#### Description
+
+A machine learning system for predicting academic performance using regression techniques.
+
+#### Technologies
+
+* Python
+* Scikit-Learn
+* Linear Regression
+
+---
+
+## 10. EventGo
+
+#### Description
+
+A collaborative event discovery and management platform.
+
+#### Technologies
+
+* Next.js
+
+---
+
+# Career Interests
+
+These are the roles your portfolio naturally supports:
+
+### Primary Targets
+
+* Software Engineer
+* Full-Stack Developer
+* Backend Developer
+
+### Strong Secondary Targets
+
+* AI Engineer
+* Machine Learning Engineer
+* Java Developer
+* Python Developer
+* Full-Stack AI Developer
+
+### Long-Term Paths
+
+* Solutions Architect
+* Technical Lead
+* Software Architect
+* AI Solutions Engineer
+
+---
+
+# Personal Brand
+
+Your website should consistently communicate these themes:
+
+### Keywords
+
+* Full-Stack Engineer
+* AI Enthusiast
+* Problem Solver
+* Software Architect
+* Machine Learning Developer
+* Backend Specialist
+* System Designer
+
+### Tagline Ideas
+
+**Option 1**
+
+> Building intelligent software that solves real-world problems.
+
+**Option 2**
+
+> Full-Stack Developer crafting scalable systems, AI solutions, and modern digital experiences.
+
+**Option 3**
+
+> Computer Science Undergraduate | Full-Stack Developer | AI & Machine Learning Enthusiast
+
+If I were building your portfolio, I'd position you as a **Full-Stack Software Engineer with strong AI/ML capabilities**, because that best matches the breadth and quality of your project portfolio.

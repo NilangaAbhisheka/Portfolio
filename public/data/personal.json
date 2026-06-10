@@ -1,0 +1,25 @@
+{
+  "name": "Nilanga Abhisheka Muthukumarana",
+  "title": "Software Engineer",
+  "tagline": "Building scalable software, intelligent systems, and modern digital experiences.",
+  "availability": "Available for opportunities",
+  "availabilityStatus": "open",
+  "currentFocus": [
+    "Backend Engineering",
+    "AI Systems",
+    "Full-Stack Development"
+  ],
+  "stats": {
+    "projectsBuilt": "10+",
+    "technologies": "25+",
+    "languages": "7",
+    "yearsCoding": "3+"
+  },
+  "links": {
+    "github": "https://github.com/nilanga",
+    "linkedin": "https://linkedin.com/in/nilanga",
+    "email": "nilanga@example.com",
+    "resume": "/resume.pdf"
+  },
+  "bio": "I am a Computer Science undergraduate with a strong passion for building scalable software solutions across web, mobile, and artificial intelligence domains. My experience spans full-stack development, machine learning, enterprise software, and modern software architecture. I enjoy working on challenging projects involving backend engineering, system architecture, and machine learning — continuously exploring new technologies while strengthening my foundation in software engineering principles."
+}

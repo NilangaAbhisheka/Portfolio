@@ -1,0 +1,509 @@
+Portfolio Website Project Report
+Personal Engineering Command Center Portfolio
+1. Project Vision
+
+The goal is not to build a typical student portfolio.
+
+The goal is to build a website that immediately communicates:
+
+"This person can design, build, and deploy real software systems."
+
+The website should position you as:
+
+Computer Science Undergraduate
+Full Stack Developer
+AI/ML Enthusiast
+Software Engineer
+
+The portfolio should feel like a product rather than a résumé.
+
+2. Portfolio Objectives
+
+The website should:
+
+Showcase
+Technical skills
+Software architecture knowledge
+Engineering thinking
+Problem-solving ability
+Project complexity
+Attract
+Internship recruiters
+Graduate recruiters
+Software engineering hiring managers
+Freelance opportunities
+Demonstrate
+Frontend development
+UI/UX understanding
+Software architecture
+Professional presentation
+3. Personal Branding
+Hero Statement
+Nilanga Abhisheka Muthukumarana
+
+Computer Science Undergraduate
+Full Stack Developer
+AI/ML Enthusiast
+
+Building scalable software,
+intelligent systems,
+and modern digital experiences.
+Personal Introduction
+
+Focus on:
+
+Software engineering
+Backend development
+AI systems
+Full-stack development
+
+Avoid:
+
+I am passionate about technology.
+
+Everyone writes that.
+
+Instead:
+
+I enjoy building systems that solve real-world problems,
+from enterprise management platforms to machine-learning-powered applications.
+4. Design Language
+Theme
+
+Mission Control Dashboard
+
+Inspired by:
+
+Linear
+Vercel
+Notion
+GitHub
+Stripe Dashboard
+Colors
+Background
+#0A0A0A
+Surface Cards
+#111111
+Borders
+#262626
+Text
+#FFFFFF
+#A1A1AA
+Accent
+#3B82F6
+
+or
+
+#06B6D4
+Typography
+
+Headings
+
+Inter
+
+Body
+
+Inter
+
+Code
+
+JetBrains Mono
+5. Technology Stack
+Frontend
+Next.js 15
+TypeScript
+Tailwind CSS
+UI Components
+shadcn/ui
+Animations
+Framer Motion
+Charts
+Recharts
+Icons
+Lucide React
+Content Management
+MDX
+Deployment
+Vercel
+6. Website Structure
+/
+├── Home
+├── Projects
+├── Architecture
+├── Tech Stack
+├── Timeline
+├── Contact
+7. Homepage Layout
+Section 1 — Hero
+
+Height:
+
+100vh
+
+Layout:
+
+LEFT
+Hero Text
+
+RIGHT
+Engineering Dashboard
+Dashboard Widget
+SYSTEM STATUS
+
+Projects Built       10+
+Technologies         25+
+Repositories         XX
+Years Coding         X+
+
+Current Focus:
+Backend Engineering
+AI Systems
+8. Engineering Snapshot
+
+Instead of a long About section.
+
+Create skill cards.
+
+Backend
+Node.js
+Express.js
+FastAPI
+Spring Boot
+ASP.NET Core
+Frontend
+React
+Next.js
+TypeScript
+Tailwind
+Databases
+PostgreSQL
+MySQL
+MongoDB
+SQL Server
+Redis
+AI/ML
+TensorFlow
+Scikit-learn
+Prophet
+LangChain
+ChromaDB
+Mobile
+Flutter
+React Native
+Firebase
+9. Featured Projects
+
+The most important section.
+
+1. SpendWise
+Description
+
+AI-powered personal finance application.
+
+Technologies
+FastAPI
+PostgreSQL
+Redis
+TensorFlow
+React Native
+Highlights
+Expense tracking
+Financial prediction
+Budget recommendations
+Analytics dashboard
+2. TraceIQ
+Description
+
+Criminal identification platform using facial recognition.
+
+Technologies
+FastAPI
+DDD Architecture
+Face Recognition
+Python
+Highlights
+Face matching
+Criminal records
+Investigation workflows
+3. Warehouse Management System
+Description
+
+Enterprise inventory and warehouse platform.
+
+Technologies
+React
+Node.js
+MongoDB
+JWT
+Leaflet
+Highlights
+Inventory tracking
+Geospatial warehouse management
+Analytics dashboards
+4. EduManager
+Description
+
+Student management system.
+
+Technologies
+Spring Boot
+React TypeScript
+5. StoryMancer
+Description
+
+AI-powered story recommendation engine.
+
+Technologies
+LangChain
+Embeddings
+ChromaDB
+Gradio
+10. Project Detail Pages
+
+Each project gets its own page.
+
+Structure:
+
+Overview
+
+Problem
+
+Solution
+
+Features
+
+Architecture
+
+Technology Stack
+
+Challenges
+
+Lessons Learned
+
+Screenshots
+
+GitHub
+
+Live Demo
+11. Architecture Showcase
+
+This is where your portfolio becomes memorable.
+
+SpendWise Architecture
+React Native
+      │
+      ▼
+FastAPI Backend
+      │
+ ┌────┴─────┐
+ ▼          ▼
+
+Redis    PostgreSQL
+ Cache     Database
+
+      │
+      ▼
+
+ML Prediction Engine
+TraceIQ Architecture
+Frontend
+    │
+    ▼
+
+FastAPI
+
+    │
+
+DDD Layers
+
+    │
+
+Face Recognition Engine
+
+    │
+
+Database
+Warehouse System
+React
+
+  │
+
+Node.js API
+
+  │
+
+MongoDB
+
+  │
+
+Analytics Layer
+12. Technology Radar
+
+Interactive visualization.
+
+Center:
+
+CORE STACK
+
+Surrounding technologies:
+
+React
+Node.js
+Python
+FastAPI
+PostgreSQL
+MongoDB
+Flutter
+Spring Boot
+TensorFlow
+Redis
+Docker
+Git
+13. Career Timeline
+2022
+
+Started Computer Science degree.
+
+2023
+
+Built initial web applications.
+
+2024
+
+Focused on full-stack systems.
+
+2025
+
+Developed enterprise software.
+
+2026
+
+Built AI-powered applications and recommendation systems.
+
+14. GitHub Integration
+
+Display:
+
+Contribution Graph
+GitHub Calendar
+Most Used Languages
+TypeScript
+Python
+Java
+C#
+SQL
+Recent Repositories
+
+Latest projects.
+
+15. Contact Section
+
+Simple.
+
+GitHub
+LinkedIn
+Email
+Resume
+
+No contact form.
+
+Direct communication converts better.
+
+16. Advanced Features
+Project Filters
+
+Buttons:
+
+All
+
+AI/ML
+
+Backend
+
+Frontend
+
+Mobile
+
+Enterprise
+
+Academic
+Search
+
+Search projects instantly.
+
+Search Projects...
+Command Palette
+
+Press:
+
+CTRL + K
+
+Open:
+
+Search Projects
+Search Skills
+Navigate Sections
+Download Resume
+Dark/Light Toggle
+
+Keep dark mode default.
+
+17. SEO
+
+Add:
+
+Meta Tags
+Nilanga Abhisheka Muthukumarana
+
+Software Engineer Portfolio
+
+Full Stack Developer
+
+AI Engineer
+Keywords
+Software Engineer
+Full Stack Developer
+React Developer
+FastAPI Developer
+Machine Learning Engineer
+Sri Lanka
+Computer Science
+18. Folder Structure
+src/
+
+├── app/
+│
+├── components/
+│
+├── sections/
+│
+├── features/
+│
+├── lib/
+│
+├── hooks/
+│
+├── data/
+│
+├── types/
+│
+└── content/
+
+content/
+
+├── projects/
+│
+├── blogs/
+│
+└── achievements/
+Final Product Outcome
+
+When a recruiter lands on your site, they should immediately understand:
+
+You build full-stack applications.
+You understand software architecture.
+You have experience with AI/ML systems.
+You can work across web, mobile, backend, and databases.
+You have completed multiple substantial projects beyond classroom exercises.
+
+The site should feel less like "a student portfolio" and more like "the public dashboard of an early-career software engineer." That positioning will do far more for your opportunities than flashy animations or trendy effects.
