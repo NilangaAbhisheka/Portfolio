@@ -1,0 +1,235 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { ArrowDown, Download, Zap, Circle } from 'lucide-react';
+import { personal } from '@/data/personal';
+
+function CountUp({ target, suffix = '' }: { target: string; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [displayed, setDisplayed] = useState('0');
+
+  useEffect(() => {
+    if (!isInView) return;
+    const num = parseInt(target.replace(/\D/g, ''), 10);
+    if (isNaN(num)) {
+      setDisplayed(target);
+      return;
+    }
+    const duration = 1200;
+    const steps = 40;
+    const increment = num / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= num) {
+        setDisplayed(target);
+        clearInterval(timer);
+      } else {
+        setDisplayed(Math.floor(current) + (target.includes('+') ? '+' : ''));
+      }
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [isInView, target]);
+
+  return <span ref={ref}>{displayed}{suffix}</span>;
+}
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+export default function HeroSection() {
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    const update = () =>
+      setTime(new Date().toLocaleTimeString('en-US', { hour12: false }));
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center pt-16 overflow-hidden"
+    >
+      {/* Background grid */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
+      {/* Radial glow */}
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#3b82f6]/5 blur-[120px] pointer-events-none" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          {/* ── Left column ── */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6"
+          >
+            {/* Label */}
+            <motion.div variants={itemVariants}>
+              <span className="inline-flex items-center gap-2 text-xs font-mono text-[#06b6d4] bg-[#06b6d4]/10 border border-[#06b6d4]/20 px-3 py-1.5 rounded-full">
+                <Zap className="w-3 h-3" />
+                Computer Science Undergraduate
+              </span>
+            </motion.div>
+
+            {/* Name */}
+            <motion.div variants={itemVariants} className="space-y-1">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
+                Nilanga Abhisheka
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] to-[#06b6d4]">
+                  Muthukumarana
+                </span>
+              </h1>
+            </motion.div>
+
+            {/* Tagline */}
+            <motion.div variants={itemVariants}>
+              <p className="text-lg text-[#a1a1aa] leading-relaxed max-w-md">
+                Building scalable software,
+                <br />
+                intelligent systems,
+                <br />
+                and modern digital experiences.
+              </p>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-3 pt-2">
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-medium rounded-lg transition-colors duration-200 text-sm"
+              >
+                View Projects
+                <ArrowDown className="w-4 h-4" />
+              </a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#262626] hover:border-[#3b82f6]/50 text-[#a1a1aa] hover:text-white font-medium rounded-lg transition-all duration-200 text-sm hover:bg-white/5"
+              >
+                <Download className="w-4 h-4" />
+                Download Resume
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* ── Right column: Engineering Dashboard ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+          >
+            <div className="bg-[#111111] border border-[#262626] rounded-xl overflow-hidden font-mono text-sm shadow-2xl">
+              {/* Header bar */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-[#262626] bg-[#0d0d0d]">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-3.5 h-3.5 text-[#06b6d4]" />
+                  <span className="text-xs text-[#a1a1aa] uppercase tracking-widest">
+                    System Status
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#06b6d4] animate-pulse" />
+                  <span className="text-xs text-[#06b6d4] font-semibold">ONLINE</span>
+                </div>
+              </div>
+
+              {/* Stats */}
+              <div className="px-4 py-4 space-y-3 border-b border-[#262626]">
+                {[
+                  { label: 'Projects Built', value: personal.stats.projectsBuilt },
+                  { label: 'Technologies', value: personal.stats.technologies },
+                  { label: 'Languages', value: personal.stats.languages },
+                  { label: 'Years Coding', value: personal.stats.yearsCoding },
+                ].map((stat) => (
+                  <div key={stat.label} className="flex items-center justify-between">
+                    <span className="text-[#a1a1aa] text-xs">{stat.label}</span>
+                    <span className="text-white font-semibold">
+                      <CountUp target={stat.value} />
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Current Focus */}
+              <div className="px-4 py-4 border-b border-[#262626]">
+                <p className="text-[10px] text-[#a1a1aa] uppercase tracking-widest mb-3">
+                  Current Focus
+                </p>
+                <div className="space-y-2">
+                  {personal.currentFocus.map((item) => (
+                    <div key={item} className="flex items-center gap-2">
+                      <span className="text-[#3b82f6]">▶</span>
+                      <span className="text-[#e4e4e7] text-xs">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Status */}
+              <div className="px-4 py-4">
+                <p className="text-[10px] text-[#a1a1aa] uppercase tracking-widest mb-3">
+                  Status
+                </p>
+                <div className="flex items-center gap-2">
+                  <Circle className="w-2 h-2 fill-[#06b6d4] text-[#06b6d4]" />
+                  <span className="text-[#e4e4e7] text-xs">
+                    {personal.availability}
+                    <span className="cursor-blink text-[#06b6d4] ml-0.5">▌</span>
+                  </span>
+                </div>
+                {time && (
+                  <p className="text-[10px] text-[#a1a1aa] mt-3">
+                    Local time — {time}
+                  </p>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#a1a1aa]"
+        >
+          <span className="text-[10px] font-mono uppercase tracking-widest">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <ArrowDown className="w-4 h-4" />
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
