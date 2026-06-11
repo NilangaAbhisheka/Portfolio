@@ -180,6 +180,15 @@
   animation: galaxy-star-twinkle 3s ease-in-out infinite;
 }
 
+/* Mission Control grid — shared across the portfolio */
+.mc-grid-bg {
+  background-color: #0a0a0a;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

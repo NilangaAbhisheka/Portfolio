@@ -210,7 +210,7 @@ export default function TechGalaxy() {
   const showGraph = perf.mountGraph && dimensions.width > 0;
 
   return (
-    <section ref={sectionRef} id="skills" className="relative py-24 bg-[#0a0a0a]">
+    <section ref={sectionRef} id="skills" className="relative py-24">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#262626] to-transparent" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

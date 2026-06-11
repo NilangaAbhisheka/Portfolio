@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 const ProjectsSection = dynamic(() => import('@/sections/ProjectsSection'), {
   loading: () => (
-    <section id="projects" className="py-24 bg-[#0a0a0a]">
+    <section id="projects" className="py-24">
       <div className="max-w-6xl mx-auto px-4 animate-pulse">
         <div className="h-8 w-48 rounded bg-[#262626] mb-8" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -43,7 +43,7 @@ export default function LazyProjectsSection() {
   return (
     <div ref={sentinelRef}>
       {shouldLoad ? <ProjectsSection /> : (
-        <section id="projects" className="py-24 bg-[#0a0a0a] min-h-[50vh]" aria-hidden />
+        <section id="projects" className="py-24 min-h-[50vh]" aria-hidden />
       )}
     </div>
   );

@@ -121,7 +121,7 @@ The roadmap originally specified a 6-card SkillCard grid. **TechGalaxy** (intera
 - [x] GitHub, LinkedIn, Email, Resume links (no form) — [ContactSection.tsx](src/sections/ContactSection.tsx)
 - [x] Inline footer
 - [ ] Replace placeholder URLs in [personal.json](public/data/personal.json) with real GitHub/LinkedIn/email
-- [ ] Add [public/resume.pdf](public/resume.pdf)
+- [] Add [public/resume.pdf](public/resume.pdf)
 
 ---
 

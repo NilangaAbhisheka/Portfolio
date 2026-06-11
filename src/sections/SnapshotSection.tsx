@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 function GalaxySkeleton() {
   return (
-    <section id="skills" className="relative py-24 bg-[#0a0a0a]">
+    <section id="skills" className="relative py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8 animate-pulse">
           <div className="h-3 w-40 rounded bg-[#262626]" />
