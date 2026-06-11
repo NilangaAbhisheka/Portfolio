@@ -8,14 +8,16 @@ import ContactSection from '@/sections/ContactSection';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden mc-grid-bg">
+    <main className="relative min-h-screen overflow-x-hidden bg-[#0a0a0a]">
       <Navbar />
       <HeroSection />
-      <SnapshotSection />
-      <LazyProjectsSection />
-      <ArchitectureSection />
-      <TimelineSection />
-      <ContactSection />
+      <div className="mc-grid-bg-soft">
+        <SnapshotSection />
+        <LazyProjectsSection />
+        <ArchitectureSection />
+        <TimelineSection />
+        <ContactSection />
+      </div>
     </main>
   );
 }

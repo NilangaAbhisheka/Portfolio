@@ -6,9 +6,10 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { projects } from '@/data/projects';
 import type { Project } from '@/types';
 
-const architectureProjects = projects.filter(
-  (p) => p.featured && p.architecture,
-);
+const architectureProjects = projects.filter((p) => p.architecture);
+
+const INITIAL_VISIBLE = 2;
+const VISIBLE_INCREMENT = 2;
 
 function ArchitectureCard({ project, index }: { project: Project; index: number }) {
   return (
@@ -78,10 +79,11 @@ function ArchitectureCard({ project, index }: { project: Project; index: number 
 }
 
 export default function ArchitectureSection() {
-  const [expanded, setExpanded] = useState(false);
-  const initial = architectureProjects.slice(0, 2);
-  const rest = architectureProjects.slice(2);
-  const hiddenCount = rest.length;
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+
+  const visibleProjects = architectureProjects.slice(0, visibleCount);
+  const canShowMore = visibleCount < architectureProjects.length;
+  const canShowFewer = visibleCount > INITIAL_VISIBLE;
 
   return (
     <section id="architecture" className="py-24 relative">
@@ -102,50 +104,53 @@ export default function ArchitectureSection() {
             How Systems Are Designed
           </h2>
           <p className="mt-3 text-[#a1a1aa] max-w-lg">
-            Architecture diagrams for the most complex projects — with the reasoning behind each design decision.
+            Architecture diagrams for every project — with the reasoning behind each design decision.
           </p>
         </motion.div>
 
         <div className="space-y-8">
-          {initial.map((project, i) => (
-            <ArchitectureCard key={project.slug} project={project} index={i} />
-          ))}
-
-          <AnimatePresence>
-            {expanded &&
-              rest.map((project, i) => (
-                <motion.div
-                  key={project.slug}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                >
-                  <ArchitectureCard project={project} index={i + 2} />
-                </motion.div>
-              ))}
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project, i) => (
+              <motion.div
+                key={project.slug}
+                layout
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
+                <ArchitectureCard project={project} index={i} />
+              </motion.div>
+            ))}
           </AnimatePresence>
         </div>
 
-        {hiddenCount > 0 && (
-          <div className="mt-10 flex justify-center">
-            <button
-              type="button"
-              onClick={() => setExpanded((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-lg border border-[#262626] bg-[#111111] px-5 py-2.5 text-sm font-medium text-[#a1a1aa] transition-all hover:border-[#3b82f6]/40 hover:text-white"
-            >
-              {expanded ? (
-                <>
-                  <ChevronUp className="h-4 w-4" />
-                  Show fewer diagrams
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="h-4 w-4" />
-                  Show {hiddenCount} more architecture{hiddenCount > 1 ? 's' : ''}
-                </>
-              )}
-            </button>
+        {(canShowMore || canShowFewer) && (
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            {canShowMore && (
+              <button
+                type="button"
+                onClick={() =>
+                  setVisibleCount((c) =>
+                    Math.min(c + VISIBLE_INCREMENT, architectureProjects.length),
+                  )
+                }
+                className="inline-flex items-center gap-2 rounded-lg border border-[#262626] bg-[#111111] px-5 py-2.5 text-sm font-medium text-[#a1a1aa] transition-all hover:border-[#3b82f6]/40 hover:text-white"
+              >
+                <ChevronDown className="h-4 w-4" />
+                Show more
+              </button>
+            )}
+            {canShowFewer && (
+              <button
+                type="button"
+                onClick={() => setVisibleCount(INITIAL_VISIBLE)}
+                className="inline-flex items-center gap-2 rounded-lg border border-[#262626] bg-[#111111] px-5 py-2.5 text-sm font-medium text-[#a1a1aa] transition-all hover:border-[#3b82f6]/40 hover:text-white"
+              >
+                <ChevronUp className="h-4 w-4" />
+                Show fewer
+              </button>
+            )}
           </div>
         )}
       </div>

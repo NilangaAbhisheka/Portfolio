@@ -169,7 +169,8 @@
     ],
     "githubUrl": "https://github.com/nilanga/villageconnect",
     "coverImage": "/images/projects/villageconnect.png",
-    "year": 2024
+    "year": 2024,
+    "architecture": "Flutter App (Riverpod)\n      │\n      ▼\n  Firebase Auth\n      │\n ┌────┴────┐\n ▼         ▼\nFirestore   FCM\n(real-time) (push)"
   },
   {
     "slug": "moviemind",
@@ -195,7 +196,8 @@
     ],
     "githubUrl": "https://github.com/nilanga/moviemind",
     "coverImage": "/images/projects/moviemind.png",
-    "year": 2023
+    "year": 2023,
+    "architecture": "Rating Dataset\n      │\n      ▼\nFeature Engineering\n      │\n ┌────┴─────┐\n ▼          ▼\nSVD CF    Content-Based\n      │\n      ▼\nHybrid Recommender"
   },
   {
     "slug": "motormart",
@@ -221,7 +223,8 @@
     ],
     "githubUrl": "https://github.com/nilanga/motormart",
     "coverImage": "/images/projects/motormart.png",
-    "year": 2024
+    "year": 2024,
+    "architecture": "React Frontend\n      │\n      ▼\nASP.NET Core API\n      │\n SignalR Hub\n      │\n    MySQL"
   },
   {
     "slug": "grade-predictor",
@@ -247,7 +250,8 @@
     ],
     "githubUrl": "https://github.com/nilanga/grade-predictor",
     "coverImage": "/images/projects/grade-predictor.png",
-    "year": 2023
+    "year": 2023,
+    "architecture": "Student Dataset\n      │\n      ▼\nFeature Engineering\n      │\n ┌────┴────┐\n ▼         ▼\nLinear     Ridge\nRegression Regression\n      │\n      ▼\nPredictions + Charts"
   },
   {
     "slug": "eventgo",
@@ -273,6 +277,7 @@
     ],
     "githubUrl": "https://github.com/nilanga/eventgo",
     "coverImage": "/images/projects/eventgo.png",
-    "year": 2023
+    "year": 2023,
+    "architecture": "Next.js App\n      │\n      ▼\nEvent / RSVP Layer\n      │\nClient State\n(filters, seats)"
   }
 ]

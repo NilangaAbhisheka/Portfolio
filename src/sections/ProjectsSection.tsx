@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search } from 'lucide-react';
+import { ChevronDown, ChevronUp, Search } from 'lucide-react';
 import { projects } from '@/data/projects';
 import type { Project, ProjectCategory } from '@/types';
 import ProjectCard from '@/components/shared/ProjectCard';
@@ -18,10 +18,16 @@ const categories: Array<ProjectCategory | 'All'> = [
   'Academic',
 ];
 
+const COLS = 3;
+const INITIAL_ROWS = 3;
+const ROWS_INCREMENT = 3;
+const INITIAL_VISIBLE = INITIAL_ROWS * COLS;
+
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory | 'All'>('All');
   const [search, setSearch] = useState('');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
@@ -37,6 +43,14 @@ export default function ProjectsSection() {
     });
   }, [activeFilter, search]);
 
+  useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE);
+  }, [activeFilter, search]);
+
+  const visibleProjects = filtered.slice(0, visibleCount);
+  const canShowMore = visibleCount < filtered.length;
+  const canShowFewer = visibleCount > INITIAL_VISIBLE;
+
   return (
     <section id="projects" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,7 +63,7 @@ export default function ProjectsSection() {
           className="mb-10"
         >
           <p className="text-[10px] font-mono text-[#3b82f6] uppercase tracking-widest mb-3">
-            03 / Featured Projects
+            03 / Projects
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">What I&apos;ve Built</h2>
           <p className="mt-3 text-[#a1a1aa] max-w-lg">
@@ -59,7 +73,6 @@ export default function ProjectsSection() {
 
         {/* Search + Filter */}
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
-          {/* Search */}
           <div className="relative flex-1 max-w-xs">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#a1a1aa]" />
             <input
@@ -71,7 +84,6 @@ export default function ProjectsSection() {
             />
           </div>
 
-          {/* Filter buttons */}
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
               <button
@@ -89,19 +101,14 @@ export default function ProjectsSection() {
           </div>
         </div>
 
-        {/* Count */}
         <p className="text-xs font-mono text-[#a1a1aa] mb-6">
           {filtered.length} project{filtered.length !== 1 ? 's' : ''}
           {activeFilter !== 'All' && ` in ${activeFilter}`}
         </p>
 
-        {/* Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-        >
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project) => (
+            {visibleProjects.map((project) => (
               <motion.div
                 key={project.slug}
                 layout
@@ -124,9 +131,37 @@ export default function ProjectsSection() {
             No projects match &quot;{search}&quot;
           </div>
         )}
+
+        {filtered.length > 0 && (canShowMore || canShowFewer) && (
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            {canShowMore && (
+              <button
+                type="button"
+                onClick={() =>
+                  setVisibleCount((c) =>
+                    Math.min(c + ROWS_INCREMENT * COLS, filtered.length),
+                  )
+                }
+                className="inline-flex items-center gap-2 rounded-lg border border-[#262626] bg-[#111111] px-5 py-2.5 text-sm font-medium text-[#a1a1aa] transition-all hover:border-[#3b82f6]/40 hover:text-white"
+              >
+                <ChevronDown className="h-4 w-4" />
+                Show more
+              </button>
+            )}
+            {canShowFewer && (
+              <button
+                type="button"
+                onClick={() => setVisibleCount(INITIAL_VISIBLE)}
+                className="inline-flex items-center gap-2 rounded-lg border border-[#262626] bg-[#111111] px-5 py-2.5 text-sm font-medium text-[#a1a1aa] transition-all hover:border-[#3b82f6]/40 hover:text-white"
+              >
+                <ChevronUp className="h-4 w-4" />
+                Show fewer
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
-      {/* Modal */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
