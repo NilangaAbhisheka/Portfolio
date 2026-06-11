@@ -22,13 +22,13 @@ The roadmap originally specified a 6-card SkillCard grid. **TechGalaxy** (intera
 |-------|-------------|--------|----------|
 | 0 | Project Setup & Design Tokens | Complete | 7 / 7 |
 | 1 | Foundation (Layout + Navigation) | Complete | 8 / 8 |
-| 2 | Core Homepage Sections | In progress | 21 / 30 |
+| 2 | Core Homepage Sections | In progress | 24 / 31 |
 | 3 | Hidden Admin Panel | Not started | 0 / 10 |
 | 4 | Advanced Features | Not started | 0 / 4 |
-| 5 | SEO, Performance & Deployment | Partial | 2 / 13 |
-| — | MVP Launch Checklist | Not passed | 0 / 11 |
+| 5 | SEO, Performance & Deployment | Partial | 7 / 14 |
+| — | MVP Launch Checklist | Partial | 2 / 11 |
 
-**Overall MVP estimate:** ~82% complete
+**Overall MVP estimate:** ~88% complete
 
 ### Known Bugs (resolved)
 
@@ -92,6 +92,7 @@ The roadmap originally specified a 6-card SkillCard grid. **TechGalaxy** (intera
 - [x] Add `useInView` entrance animation for section header
 - [x] Mobile: responsive graph height (`400px` → `650px`), tap-to-open panel
 - [x] Performance: lazy-load ForceGraph2D via `dynamic()` in SnapshotSection (`ssr: false`)
+- [x] Quick Reference skill card grid below galaxy — [SkillCard.tsx](src/components/shared/SkillCard.tsx), [SkillCardGrid.tsx](src/components/shared/SkillCardGrid.tsx)
 
 ### 2.3 Featured Projects
 
@@ -102,7 +103,7 @@ The roadmap originally specified a 6-card SkillCard grid. **TechGalaxy** (intera
 - [ ] Create `public/images/projects/` and add cover images for all 10 projects
 - [ ] Prioritize screenshots for 5 featured: SpendWise, TraceIQ, Warehouse, EduManager, StoryMancer
 - [ ] Verify Next.js `<Image>` sizing and `priority` on above-fold cards
-- [ ] Flesh out modal content for non-featured projects (minimum overview + tech stack)
+- [x] Flesh out modal content for non-featured projects (longDescription, challenges, lessonsLearned in [projects.json](public/data/projects.json))
 
 ### 2.4 Architecture Showcase
 
@@ -161,16 +162,18 @@ The roadmap originally specified a 6-card SkillCard grid. **TechGalaxy** (intera
 ### 5.1 Metadata & SEO
 
 - [x] Root metadata with OG/Twitter tags — [layout.tsx](src/app/layout.tsx)
-- [ ] Generate [public/og-image.png](public/og-image.png) (1200×630) or use `next/og` ImageResponse
+- [x] Generate [public/og-image.png](public/og-image.png) (1200×630)
 - [ ] Add `sitemap.xml` (optional)
 - [ ] Finalize keywords from [Portfolio Website Project Report.txt](Portfolio%20Website%20Project%20Report.txt)
 
 ### 5.2 Performance
 
 - [x] Run `npm run build` — zero TS errors and warnings
-- [x] Lazy-load heavy client libs (ForceGraph2D via dynamic import in SnapshotSection)
+- [x] Lazy-load heavy client libs — viewport-gated SnapshotSection, dynamic `TechGalaxyCanvas`, `LazyProjectsSection`
+- [x] Galaxy performance tuning — pause simulation, mobile profile, reduced motion fallback ([useGalaxyPerformance.ts](src/hooks/useGalaxyPerformance.ts), [TechGalaxyCanvas.tsx](src/components/tech/TechGalaxyCanvas.tsx))
 - [ ] Bundle analysis with `@next/bundle-analyzer`
-- [ ] Lighthouse audit: Performance, Accessibility, SEO, Best Practices 90+
+- [x] Lighthouse mobile audit (375px) — see [docs/MOBILE_QA.md](docs/MOBILE_QA.md) (Perf **85**, A11y **100**, SEO **100**)
+- [ ] Lighthouse Performance 90+ — add project cover images (broken image requests cost points when Projects section loads)
 
 ### 5.3 Deployment
 
@@ -202,7 +205,7 @@ All items must pass before deploy. Consolidated from [portfolio-implementation-r
 - [ ] Clicking a project card opens detail modal (not a new page)
 - [ ] Modal closes on Escape key, backdrop click, and close button; scroll lock works
 - [ ] `/admin` shows only passphrase prompt when unauthenticated (or admin explicitly deferred — document JSON-only workflow)
-- [ ] Site readable on iPhone-sized screen (375px wide)
+- [x] Site readable on iPhone-sized screen (375px wide) — see [docs/MOBILE_QA.md](docs/MOBILE_QA.md)
 - [ ] No console errors in production build
 
 ### Positioning Check (10-Second Test)

@@ -149,6 +149,7 @@
     "title": "VillageConnect",
     "tagline": "Connects citizens with local government offices through a mobile platform for service requests and civic communication.",
     "description": "A digital governance platform built with Flutter and Firebase that improves communication between citizens and local government offices, enabling service requests, status tracking, and community announcements.",
+    "longDescription": "VillageConnect addresses the communication gap between citizens and local government offices in rural and semi-urban areas. Built with Flutter for cross-platform mobile delivery, the app lets residents submit service requests — road repairs, utility issues, document inquiries — and track their status through each stage of government processing.\n\nFirebase provides authentication, Firestore for real-time request status updates, Cloud Messaging for announcement push notifications, and offline persistence so users in low-connectivity areas can draft requests that sync when connectivity returns. Riverpod manages application state reactively, keeping the UI consistent across request lists, detail views, and notification feeds.\n\nThe platform demonstrates mobile-first civic technology design: simple forms, clear status indicators, and bilingual-friendly layouts that work on lower-end Android devices common in the target demographic.",
     "category": ["Mobile"],
     "featured": false,
     "technologies": ["Flutter", "Dart", "Firebase", "Riverpod"],
@@ -157,6 +158,14 @@
       "Push notification system for government announcements",
       "Offline-capable architecture with Firebase sync on reconnect",
       "Riverpod state management for reactive UI updates"
+    ],
+    "challenges": [
+      "Designing offline-first request submission that reconciles conflicts when multiple edits occur during a connectivity gap",
+      "Firebase security rules that allow citizens to read only their own requests while giving office staff cross-request visibility"
+    ],
+    "lessonsLearned": [
+      "Riverpod's AsyncNotifier pattern significantly simplified loading/error states for Firestore streams compared to manual StreamBuilder wiring",
+      "Push notifications for government announcements need granular opt-in categories — blanket notifications caused high uninstall rates in early testing"
     ],
     "githubUrl": "https://github.com/nilanga/villageconnect",
     "coverImage": "/images/projects/villageconnect.png",
@@ -167,6 +176,7 @@
     "title": "MovieMind",
     "tagline": "Recommends films using a hybrid collaborative and content-based filtering approach trained on user rating history.",
     "description": "A movie recommendation system implementing both collaborative filtering (user-item matrix factorisation) and content-based filtering (genre, director, cast embeddings), combined into a hybrid model for higher accuracy.",
+    "longDescription": "MovieMind explores the classic recommendation systems problem: how do you suggest films a user will enjoy when you have sparse rating data and rich metadata? The system implements two complementary approaches.\n\nCollaborative filtering uses matrix factorisation (SVD) on the user-item rating matrix to discover latent preference dimensions — users who rated similar films similarly are mapped close together in latent space. Content-based filtering builds feature vectors from genre, director, and cast metadata, recommending films similar to ones the user has rated highly.\n\nA weighted hybrid model combines both scores, with the content-based component weighted more heavily for cold-start users who have fewer than five ratings. Evaluation uses train/test split with RMSE comparison across pure collaborative, pure content-based, and hybrid configurations.",
     "category": ["AI/ML", "Academic"],
     "featured": false,
     "technologies": ["Python", "Scikit-learn", "Pandas", "NumPy"],
@@ -174,6 +184,14 @@
       "Hybrid recommendation model combining collaborative and content-based filtering",
       "Matrix factorisation for user-item preference modelling",
       "Cold-start handling for new users via content-based fallback"
+    ],
+    "challenges": [
+      "The user-item rating matrix was extremely sparse (~98% empty), making pure collaborative filtering unreliable for users with few ratings",
+      "Normalising genre, director, and cast features into a comparable feature space required careful one-hot encoding and dimensionality reduction"
+    ],
+    "lessonsLearned": [
+      "Hybrid models consistently outperformed either approach alone on RMSE, but the improvement was largest for cold-start users — validating the weighted fallback strategy",
+      "Matrix factorisation hyperparameters (latent dimensions, regularisation) had more impact on recommendation quality than the choice between SVD implementations"
     ],
     "githubUrl": "https://github.com/nilanga/moviemind",
     "coverImage": "/images/projects/moviemind.png",
@@ -184,6 +202,7 @@
     "title": "MotorMart",
     "tagline": "A vehicle auction marketplace where buyers bid in real time and sellers manage listings through an ASP.NET Core backend.",
     "description": "A vehicle auction platform with real-time bidding, listing management, and a React frontend backed by an ASP.NET Core API connected to MySQL.",
+    "longDescription": "MotorMart is a vehicle auction marketplace connecting sellers who list cars, motorcycles, and commercial vehicles with buyers who bid in timed auctions. The React frontend provides listing browse, search, and filter interfaces, a seller dashboard for creating and managing listings with image uploads, and a live auction view with countdown timers and bid history.\n\nThe ASP.NET Core backend exposes REST endpoints for listing CRUD, user authentication, and bid placement, with SignalR hubs delivering real-time bid updates to all connected clients watching an active auction. MySQL stores listings, bids, users, and auction metadata with transactional integrity enforced at the database level — a bid must be higher than the current highest bid and the auction must still be active.\n\nThe project demonstrates full-stack development across the Microsoft ecosystem (.NET + React) with real-time features that require careful concurrency handling.",
     "category": ["Backend", "Frontend"],
     "featured": false,
     "technologies": ["React", "ASP.NET Core", "C#", "MySQL"],
@@ -191,6 +210,14 @@
       "Real-time auction bidding with WebSocket updates",
       "Seller listing management with image uploads",
       "Bid history and auction countdown timers"
+    ],
+    "challenges": [
+      "Preventing race conditions when two buyers place bids simultaneously at auction close — solved with database-level row locking and optimistic concurrency tokens",
+      "SignalR connection management at scale when hundreds of clients watch the same auction simultaneously"
+    ],
+    "lessonsLearned": [
+      "ASP.NET Core's built-in SignalR integration is significantly simpler than wiring raw WebSockets, and the automatic reconnection handling improved the auction UX during brief network drops",
+      "Storing bid history as an append-only log rather than overwriting the current bid made dispute resolution and audit trails straightforward"
     ],
     "githubUrl": "https://github.com/nilanga/motormart",
     "coverImage": "/images/projects/motormart.png",
@@ -201,6 +228,7 @@
     "title": "Student Grade Predictor",
     "tagline": "Predicts academic performance using regression models trained on attendance, assignment scores, and prior grades.",
     "description": "A machine learning system that predicts student end-of-term grades using linear regression and feature engineering over academic input data.",
+    "longDescription": "The Student Grade Predictor applies supervised learning to an educational analytics problem: can mid-term indicators predict final grades accurately enough to trigger early intervention? The dataset combines attendance percentages, assignment scores, midterm exam results, and prior semester GPA as input features.\n\nFeature engineering created derived signals — assignment score trend (improving vs declining), attendance consistency (standard deviation of weekly attendance), and a weighted composite score combining all inputs. Three regression models were compared: simple linear regression, ridge regression (L2 regularisation), and polynomial regression (degree 2).\n\nModels were evaluated with k-fold cross-validation using RMSE and R² metrics. Predicted vs actual grade scatter plots and residual analysis visualisations help instructors identify which students are at risk of underperforming relative to their mid-term trajectory.",
     "category": ["AI/ML", "Academic"],
     "featured": false,
     "technologies": ["Python", "Scikit-learn", "Pandas", "Linear Regression"],
@@ -208,6 +236,14 @@
       "Feature engineering from attendance, assignment, and midterm scores",
       "Multiple regression models with cross-validation and RMSE comparison",
       "Visual performance analysis with predicted vs actual grade plots"
+    ],
+    "challenges": [
+      "Small dataset size (~200 students) made complex models prone to overfitting — ridge regularisation was necessary to generalise",
+      "Missing attendance records for some students required an imputation strategy that didn't bias predictions toward either high or low attendance"
+    ],
+    "lessonsLearned": [
+      "Ridge regression with cross-validated alpha selection outperformed both plain linear and polynomial regression on RMSE — the dataset was too small for higher-degree polynomials to generalise",
+      "Attendance consistency (low variance) was a stronger predictor than raw attendance percentage alone, which wasn't obvious before feature engineering"
     ],
     "githubUrl": "https://github.com/nilanga/grade-predictor",
     "coverImage": "/images/projects/grade-predictor.png",
@@ -218,6 +254,7 @@
     "title": "EventGo",
     "tagline": "A collaborative event discovery and management platform where organisers publish events and attendees RSVP in real time.",
     "description": "A Next.js event platform enabling organisers to create and manage events, and attendees to browse, filter, and RSVP with real-time seat availability updates.",
+    "longDescription": "EventGo is a collaborative event discovery platform built with Next.js and TypeScript. Attendees browse upcoming events with category and date filters, view event details including venue, capacity, and organiser information, and RSVP with a live seat availability counter that updates as other users register.\n\nOrganisers access a dashboard to create events, set capacity limits, manage attendee lists, and export registration data. The UI is built entirely with Tailwind CSS following a consistent dark dashboard aesthetic that later informed the design language of this portfolio.\n\nAs an early full-stack learning project, EventGo established patterns for component composition, TypeScript interfaces for event data, and client-side filtering that carried forward into later, more complex applications.",
     "category": ["Frontend"],
     "featured": false,
     "technologies": ["Next.js", "TypeScript", "Tailwind CSS"],
@@ -225,6 +262,14 @@
       "Event discovery with category and date filters",
       "Organiser dashboard for event creation and attendee management",
       "Real-time RSVP with seat availability counter"
+    ],
+    "challenges": [
+      "Managing RSVP seat counts accurately when multiple users register simultaneously without a dedicated real-time backend",
+      "Building a responsive event card grid that remains scannable on mobile with long event titles and variable description lengths"
+    ],
+    "lessonsLearned": [
+      "TypeScript interfaces defined upfront for Event, RSVP, and Organiser types prevented an entire class of prop-drilling bugs during rapid UI iteration",
+      "Client-side filtering with useMemo was sufficient for hundreds of events — premature backend pagination would have added complexity without benefit at this scale"
     ],
     "githubUrl": "https://github.com/nilanga/eventgo",
     "coverImage": "/images/projects/eventgo.png",

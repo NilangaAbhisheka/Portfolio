@@ -36,16 +36,6 @@ function CountUp({ target, suffix = '' }: { target: string; suffix?: string }) {
   return <span ref={ref}>{displayed}{suffix}</span>;
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
-};
-
 export default function HeroSection() {
   const [time, setTime] = useState('');
 
@@ -72,28 +62,21 @@ export default function HeroSection() {
         }}
       />
       {/* Radial glow */}
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#3b82f6]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#3b82f6]/5 blur-[80px] pointer-events-none max-sm:hidden" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* ── Left column ── */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="space-y-6"
-          >
-            {/* Label */}
-            <motion.div variants={itemVariants}>
+          {/* ── Left column — static for fast LCP ── */}
+          <div className="space-y-6">
+            <div>
               <span className="inline-flex items-center gap-2 text-xs font-mono text-[#06b6d4] bg-[#06b6d4]/10 border border-[#06b6d4]/20 px-3 py-1.5 rounded-full">
                 <Zap className="w-3 h-3" />
                 Computer Science Undergraduate
               </span>
-            </motion.div>
+            </div>
 
-            {/* Name */}
-            <motion.div variants={itemVariants} className="space-y-1">
+            <div className="space-y-1">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
                 Nilanga Abhisheka
                 <br />
@@ -101,10 +84,9 @@ export default function HeroSection() {
                   Muthukumarana
                 </span>
               </h1>
-            </motion.div>
+            </div>
 
-            {/* Tagline */}
-            <motion.div variants={itemVariants}>
+            <div>
               <p className="text-lg text-[#a1a1aa] leading-relaxed max-w-md">
                 Building scalable software,
                 <br />
@@ -112,10 +94,9 @@ export default function HeroSection() {
                 <br />
                 and modern digital experiences.
               </p>
-            </motion.div>
+            </div>
 
-            {/* CTAs */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap gap-3 pt-2">
               <a
                 href="#projects"
                 onClick={(e) => {
@@ -136,14 +117,14 @@ export default function HeroSection() {
                 <Download className="w-4 h-4" />
                 Download Resume
               </a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* ── Right column: Engineering Dashboard ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
           >
             <div className="bg-[#111111] border border-[#262626] rounded-xl overflow-hidden font-mono text-sm shadow-2xl">
               {/* Header bar */}

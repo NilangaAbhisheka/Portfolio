@@ -79,7 +79,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
         </p>
 
         {/* Tech stack */}
-        <p className="font-mono text-[10px] text-[#a1a1aa]/70">
+        <p className="font-mono text-[10px] text-[#a1a1aa]">
           {project.technologies.slice(0, 4).join(' · ')}
           {project.technologies.length > 4 && ` · +${project.technologies.length - 4}`}
         </p>

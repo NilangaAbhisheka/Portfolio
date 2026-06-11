@@ -79,7 +79,7 @@ export default function ProjectsSection() {
                 onClick={() => setActiveFilter(cat)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
                   activeFilter === cat
-                    ? 'bg-[#3b82f6] text-white'
+                    ? 'bg-[#2563eb] text-white'
                     : 'bg-[#111111] text-[#a1a1aa] border border-[#262626] hover:border-[#3b82f6]/40 hover:text-white'
                 }`}
               >

@@ -20,6 +20,9 @@
 # production
 /build
 
+# lighthouse reports
+lighthouse*.json
+
 # misc
 .DS_Store
 *.pem

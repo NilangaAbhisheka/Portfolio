@@ -27,16 +27,16 @@ export default function TechGalaxyPanel({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+        className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm md:hidden"
         onClick={onClose}
       />
 
       <motion.aside
-        initial={{ x: '100%', opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: '100%', opacity: 0 }}
+        initial={{ y: '100%', opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: '100%', opacity: 0 }}
         transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-        className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col border-l border-[#262626] bg-[#111111] shadow-2xl md:top-auto md:bottom-6 md:right-6 md:h-auto md:max-h-[80vh] md:rounded-xl md:border"
+        className="fixed inset-x-0 bottom-0 z-[60] flex max-h-[88vh] w-full flex-col rounded-t-2xl border border-[#262626] bg-[#111111] shadow-2xl md:inset-x-auto md:right-6 md:bottom-6 md:top-auto md:max-h-[80vh] md:max-w-md md:rounded-xl"
       >
         <div className="flex items-start justify-between border-b border-[#262626] p-5">
           <div>

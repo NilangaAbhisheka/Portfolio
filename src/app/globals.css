@@ -146,6 +146,36 @@
   animation: cursor-blink 1s step-end infinite;
 }
 
+.nav-enter {
+  animation: nav-enter 0.4s ease-out both;
+}
+
+.nav-drawer-enter {
+  animation: nav-drawer-enter 0.2s ease-out both;
+}
+
+@keyframes nav-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nav-drawer-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .galaxy-star {
   animation: galaxy-star-twinkle 3s ease-in-out infinite;
 }

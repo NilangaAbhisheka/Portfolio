@@ -1,39 +1,45 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import ForceGraph2D, { type ForceGraphMethods } from 'react-force-graph-2d';
+import type { ForceGraphMethods } from 'react-force-graph-2d';
+import dynamic from 'next/dynamic';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Search } from 'lucide-react';
 import { techGraph } from '@/data/techGraph';
 import TechGalaxyPanel from '@/components/tech/TechGalaxyPanel';
+import SkillCardGrid from '@/components/shared/SkillCardGrid';
+import { useGalaxyPerformance } from '@/hooks/useGalaxyPerformance';
 import {
   buildGalaxyGraph,
-  CATEGORY_COLORS,
-  CORE_HUB_ID,
-  drawCategoryAnchor,
-  drawHubNode,
-  drawTechPill,
   enrichNode,
   FILTER_CATEGORIES,
   getNeighborIds,
-  getTechPillBounds,
   isTechNode,
   levelToExperience,
   type ForceGraphNode,
 } from '@/lib/galaxyUtils';
 import type { GalaxyTechNode, TechCategory, TechnologyNode } from '@/types';
 
-function Starfield() {
+const TechGalaxyCanvas = dynamic(() => import('@/components/tech/TechGalaxyCanvas'), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
+      <p className="text-xs font-mono text-[#a1a1aa] animate-pulse">Loading galaxy…</p>
+    </div>
+  ),
+});
+
+function Starfield({ count }: { count: number }) {
   const stars = useMemo(
     () =>
-      Array.from({ length: 60 }, (_, i) => ({
+      Array.from({ length: count }, (_, i) => ({
         id: i,
         left: `${(i * 17 + 7) % 100}%`,
         top: `${(i * 23 + 11) % 100}%`,
         size: i % 5 === 0 ? 2 : 1,
         delay: `${(i % 10) * 0.4}s`,
       })),
-    [],
+    [count],
   );
 
   return (
@@ -59,6 +65,7 @@ export default function TechGalaxy() {
   const sectionRef = useRef<HTMLElement>(null);
   const graphRef = useRef<ForceGraphMethods | undefined>(undefined);
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
+  const perf = useGalaxyPerformance(isInView);
   const positionsRef = useRef<Record<string, { x: number; y: number }>>({});
 
   const [hoverNode, setHoverNode] = useState<GalaxyTechNode | null>(null);
@@ -66,15 +73,10 @@ export default function TechGalaxy() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<TechCategory | 'All'>('All');
   const [graphReady, setGraphReady] = useState(false);
-  const [dimensions, setDimensions] = useState({ width: 800, height: 650 });
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   const enrichedNodes = useMemo(() => techGraph.nodes.map(enrichNode), []);
-
-  const graphData = useMemo(
-    () => buildGalaxyGraph(enrichedNodes),
-    [enrichedNodes],
-  );
-
+  const graphData = useMemo(() => buildGalaxyGraph(enrichedNodes), [enrichedNodes]);
   const techNodes = useMemo(
     () => graphData.nodes.filter(isTechNode),
     [graphData.nodes],
@@ -173,42 +175,10 @@ export default function TechGalaxy() {
   }, []);
 
   useEffect(() => {
-    const fg = graphRef.current;
-    if (!fg || dimensions.width === 0) return;
-
-    fg.d3Force('charge')?.strength((node: object) => {
-      const n = node as ForceGraphNode;
-      if (n.nodeKind === 'hub') return -1600;
-      if (n.nodeKind === 'category') return -550;
-      return -400;
-    });
-
-    fg.d3Force('link')
-      ?.distance((link: object) => {
-        const kind = (link as { kind?: string }).kind;
-        if (kind === 'hub-category') return 168;
-        if (kind === 'category-tech') return 48;
-        if (kind === 'hub-core') return 92;
-        return 72;
-      })
-      .strength((link: object) => {
-        const kind = (link as { kind?: string }).kind;
-        if (kind === 'hub-category') return 0.55;
-        if (kind === 'category-tech') return 0.95;
-        if (kind === 'hub-core') return 0.5;
-        return 0.2;
-      });
-  }, [dimensions, graphData]);
-
-  useEffect(() => {
-    if (!isInView || !graphRef.current || graphReady) return;
-    const timer = setTimeout(() => {
-      graphRef.current?.zoom(0.92, 1400);
-      graphRef.current?.centerAt(0, 0, 1400);
-      setGraphReady(true);
-    }, 400);
-    return () => clearTimeout(timer);
-  }, [isInView, graphReady]);
+    if (!graphReady || !graphRef.current) return;
+    graphRef.current.zoom(0.92, 800);
+    graphRef.current.centerAt(0, 0, 800);
+  }, [graphReady]);
 
   useEffect(() => {
     if (!searchMatchId || !graphRef.current) return;
@@ -219,13 +189,10 @@ export default function TechGalaxy() {
     }
   }, [searchMatchId]);
 
-  const handleNodeClick = useCallback(
-    (node: ForceGraphNode | null) => {
-      if (!node || !isTechNode(node)) return;
-      setSelectedNode(node);
-    },
-    [],
-  );
+  const handleNodeClick = useCallback((node: ForceGraphNode | null) => {
+    if (!node || !isTechNode(node)) return;
+    setSelectedNode(node);
+  }, []);
 
   const handleNodeHover = useCallback((node: ForceGraphNode | null) => {
     if (node && isTechNode(node)) {
@@ -239,6 +206,8 @@ export default function TechGalaxy() {
     if (!selectedNode) return [];
     return [...(neighborMap.get(selectedNode.id) ?? [])];
   }, [selectedNode, neighborMap]);
+
+  const showGraph = perf.mountGraph && dimensions.width > 0;
 
   return (
     <section ref={sectionRef} id="skills" className="relative py-24 bg-[#0a0a0a]">
@@ -261,12 +230,7 @@ export default function TechGalaxy() {
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="relative mb-4"
-        >
+        <div className="relative mb-4">
           <Search
             size={16}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a1a1aa]"
@@ -278,19 +242,14 @@ export default function TechGalaxy() {
             placeholder="Search technologies… e.g. React, FastAPI"
             className="w-full rounded-lg border border-[#262626] bg-[#111111] py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-[#a1a1aa]/60 focus:border-[#3b82f6]/50 focus:outline-none"
           />
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4, delay: 0.15 }}
-          className="mb-5 flex flex-wrap gap-2"
-        >
+        <div className="mb-5 flex flex-wrap gap-2">
           {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`rounded-full border px-3 py-1 text-xs font-mono transition-all ${
+              className={`min-h-11 rounded-full border px-3 py-2 text-xs font-mono transition-all ${
                 activeCategory === cat
                   ? 'border-[#3b82f6]/50 bg-[#3b82f6]/10 text-[#3b82f6]'
                   : 'border-[#262626] text-[#a1a1aa] hover:border-[#3b82f6]/30 hover:text-white'
@@ -299,143 +258,51 @@ export default function TechGalaxy() {
               {cat === 'AI' ? 'AI / ML' : cat}
             </button>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div
           id="galaxy-canvas"
           className="relative h-[420px] sm:h-[560px] lg:h-[680px] rounded-xl border border-[#262626] bg-[#0a0a0a] overflow-hidden"
         >
-          <Starfield />
-
-          {dimensions.width > 0 && (
-            <ForceGraph2D
-              ref={graphRef}
-              width={dimensions.width}
-              height={dimensions.height}
-              graphData={graphData}
-              backgroundColor="rgba(0,0,0,0)"
-              nodeRelSize={1}
-              linkWidth={(link) => {
-                const kind = (link as { kind?: string }).kind;
-                if (kind === 'hub-core') return 2;
-                if (kind === 'hub-category') return 1;
-                return 1.2;
-              }}
-              linkColor={(link) => {
-                const s = typeof link.source === 'object' ? link.source.id : link.source;
-                const t = typeof link.target === 'object' ? link.target.id : link.target;
-                const kind = (link as { kind?: string }).kind;
-                const opacity = getLinkOpacity(s as string, t as string, kind);
-                if (kind === 'hub-core') return `rgba(6, 182, 212, ${opacity})`;
-                if (kind === 'hub-category') return `rgba(59, 130, 246, ${opacity})`;
-                return `rgba(148, 163, 184, ${opacity})`;
-              }}
-              linkDirectionalParticles={(link) =>
-                (link as { kind?: string }).kind === 'hub-core' ? 2 : 0
-              }
-              linkDirectionalParticleWidth={2}
-              linkDirectionalParticleSpeed={() => 0.005}
-              cooldownTicks={160}
-              d3AlphaDecay={0.018}
-              d3VelocityDecay={0.35}
-              enableNodeDrag
-              onNodeClick={(node) => handleNodeClick(node as ForceGraphNode)}
-              onNodeHover={(node) => handleNodeHover(node as ForceGraphNode | null)}
-              onBackgroundClick={() => {
-                setHoverNode(null);
-                setSelectedNode(null);
-              }}
-              onNodeDrag={(node) => {
-                const n = node as ForceGraphNode;
-                if (n.nodeKind === 'hub') {
-                  n.fx = 0;
-                  n.fy = 0;
-                }
-              }}
-              onNodeDragEnd={(node) => {
-                const n = node as ForceGraphNode;
-                if (n.nodeKind === 'hub') {
-                  n.fx = 0;
-                  n.fy = 0;
-                } else if (n.nodeKind === 'category') {
-                  /* fx/fy stay pinned */
-                } else if (isTechNode(n)) {
-                  n.fx = undefined;
-                  n.fy = undefined;
-                }
-              }}
-              onEngineTick={() => {
-                for (const node of graphData.nodes as ForceGraphNode[]) {
-                  if (node.x != null && node.y != null) {
-                    positionsRef.current[node.id] = { x: node.x, y: node.y };
-                  }
-                  if (
-                    isTechNode(node) &&
-                    node.x != null &&
-                    node.y != null
-                  ) {
-                    const dx = node.clusterX - node.x;
-                    const dy = node.clusterY - node.y;
-                    node.vx = (node.vx ?? 0) + dx * 0.014;
-                    node.vy = (node.vy ?? 0) + dy * 0.014;
-                  }
-                }
-              }}
-              nodeCanvasObject={(node, ctx, globalScale) => {
-                const n = node as ForceGraphNode;
-                const opacity = getNodeOpacity(n);
-
-                if (n.nodeKind === 'hub' && n.x != null && n.y != null) {
-                  const pulse = 0.5 + 0.5 * Math.sin(Date.now() / 700);
-                  drawHubNode(ctx, n.x, n.y, globalScale, pulse);
-                  return;
-                }
-
-                if (n.nodeKind === 'category') {
-                  drawCategoryAnchor(ctx, n, globalScale, opacity);
-                  return;
-                }
-
-                if (isTechNode(n) && n.x != null && n.y != null) {
-                  const isHovered = hoverNode?.id === n.id;
-                  drawTechPill(
-                    ctx,
-                    n.x,
-                    n.y,
-                    n.id,
-                    CATEGORY_COLORS[n.group],
-                    globalScale,
-                    opacity,
-                    isHovered,
-                    !!n.isCore,
-                  );
-                }
-              }}
-              nodePointerAreaPaint={(node, color, ctx) => {
-                const n = node as ForceGraphNode;
-                if (n.nodeKind === 'hub' && n.x != null && n.y != null) {
-                  ctx.fillStyle = color;
-                  ctx.beginPath();
-                  ctx.arc(n.x, n.y, 40, 0, 2 * Math.PI);
-                  ctx.fill();
-                  return;
-                }
-                if (n.nodeKind === 'category') return;
-                if (isTechNode(n) && n.x != null && n.y != null) {
-                  const isHovered = hoverNode?.id === n.id;
-                  const { w, h } = getTechPillBounds(n.id, 1, isHovered);
-                  ctx.fillStyle = color;
-                  ctx.fillRect(n.x - w / 2, n.y - h / 2, w, h);
-                }
-              }}
-            />
+          {perf.reducedMotion ? (
+            <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+              <p className="text-sm font-mono text-[#3b82f6]">CORE STACK</p>
+              <p className="text-sm text-[#a1a1aa]">
+                React · TypeScript · Node.js · FastAPI · PostgreSQL · Docker
+              </p>
+              <p className="text-xs text-[#a1a1aa]">
+                Interactive galaxy disabled for reduced motion — use Quick Reference below.
+              </p>
+            </div>
+          ) : (
+            <>
+              <Starfield count={perf.starCount} />
+              {showGraph && (
+                <TechGalaxyCanvas
+                  graphRef={graphRef}
+                  graphData={graphData}
+                  dimensions={dimensions}
+                  perf={perf}
+                  hoverNode={hoverNode}
+                  getNodeOpacity={getNodeOpacity}
+                  getLinkOpacity={getLinkOpacity}
+                  onNodeClick={handleNodeClick}
+                  onNodeHover={handleNodeHover}
+                  onBackgroundClick={() => {
+                    setHoverNode(null);
+                    setSelectedNode(null);
+                  }}
+                  onPositionsUpdate={(positions) => {
+                    positionsRef.current = positions;
+                  }}
+                  onGraphReady={() => setGraphReady(true)}
+                />
+              )}
+            </>
           )}
 
           <AnimatePresence>
-            {hoverNode && !selectedNode && (
+            {hoverNode && !selectedNode && showGraph && (
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -453,11 +320,16 @@ export default function TechGalaxy() {
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
-        <p className="mt-3 text-center text-[10px] font-mono text-[#a1a1aa]/60">
+        <p className="mt-3 text-center text-[10px] font-mono text-[#a1a1aa]">
           Category clusters orbit the core · Drag nodes · Search to focus · Click for details
         </p>
+
+        <SkillCardGrid
+          activeCategory={activeCategory}
+          onCategorySelect={setActiveCategory}
+        />
       </div>
 
       <AnimatePresence>

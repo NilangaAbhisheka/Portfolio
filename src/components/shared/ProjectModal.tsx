@@ -61,7 +61,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 pointer-events-none"
           >
             <div
-              className="pointer-events-auto w-full sm:max-w-3xl bg-[#111111] border border-[#262626] rounded-t-2xl sm:rounded-2xl overflow-y-auto max-h-[92vh] sm:max-h-[88vh] shadow-2xl"
+              className="pointer-events-auto w-full sm:max-w-3xl bg-[#111111] border border-[#262626] rounded-t-2xl sm:rounded-2xl overflow-y-auto overscroll-contain max-h-[92dvh] sm:max-h-[88vh] shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Top bar */}
