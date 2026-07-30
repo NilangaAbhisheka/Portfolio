@@ -3,7 +3,6 @@ import HeroSection from '@/sections/HeroSection';
 import SnapshotSection from '@/sections/SnapshotSection';
 import LazyProjectsSection from '@/sections/LazyProjectsSection';
 import ArchitectureSection from '@/sections/ArchitectureSection';
-import TimelineSection from '@/sections/TimelineSection';
 import ContactSection from '@/sections/ContactSection';
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
         <SnapshotSection />
         <LazyProjectsSection />
         <ArchitectureSection />
-        <TimelineSection />
         <ContactSection />
       </div>
     </main>

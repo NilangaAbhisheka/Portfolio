@@ -45,7 +45,7 @@
       "Prisma's migration system and type-safe database access greatly simplified schema evolution while reducing runtime errors",
       "Building a modular NestJS backend made it easier to extend the platform with new business modules without impacting existing functionality"
     ],
-    "githubUrl": "https://github.com/nilanga/cravesdt",
+    "githubUrl": "https://github.com/NilangaAbhisheka/cravesDT.git",
     "coverImage": "/images/projects/cravesdt.png",
     "year": 2025
   },
@@ -76,7 +76,7 @@
       "Prophet is excellent at seasonal patterns but needs at least 2 full cycles of data before its forecasts become trustworthy",
       "Building the anomaly classifier as a separate service rather than embedding it in the prediction API made A/B testing model improvements significantly easier"
     ],
-    "githubUrl": "https://github.com/nilanga/spendwise",
+    "githubUrl": "https://github.com/NilangaAbhisheka/SpendWise--a-smart-personal-finance.git",
     "coverImage": "/images/projects/spendwise.png",
     "year": 2026
   },
@@ -107,7 +107,7 @@
       "Write-once audit tables enforced at the database level (append-only partitioned tables with no DELETE permissions) are more trustworthy than application-level protections",
       "Confidence thresholds for facial recognition must be configurable per use case — a missing-person search should tolerate lower confidence than a high-security verification"
     ],
-    "githubUrl": "https://github.com/nilanga/traceiq",
+    "githubUrl": "https://github.com/NilangaAbhisheka/TraceIQ.git",
     "coverImage": "/images/projects/traceiq.png",
     "year": 2025
   },
@@ -136,7 +136,7 @@
       "Clustering map markers at low zoom levels is non-negotiable once you have more than ~50 points — Leaflet's MarkerCluster plugin solved this cleanly",
       "A denormalised MongoDB schema optimised for reads made the inventory queries fast but required careful event-sourced writes to keep data consistent across locations"
     ],
-    "githubUrl": "https://github.com/nilanga/warehouse-management",
+    "githubUrl": "https://github.com/NilangaAbhisheka/Warehouse_Management_System.git",
     "coverImage": "/images/projects/warehouse-management.png",
     "year": 2024
   },
@@ -163,7 +163,7 @@
     "lessonsLearned": [
       "GitHub Actions dramatically simplifies CI/CD for Java projects once you have the Maven caching configured correctly — cold builds went from 4 minutes to under 90 seconds"
     ],
-    "githubUrl": "https://github.com/nilanga/edumanager",
+    "githubUrl": "https://github.com/sasantha1/EduManager.git",
     "coverImage": "/images/projects/edumanager.png",
     "year": 2025
   },
@@ -190,7 +190,7 @@
     "lessonsLearned": [
       "LLM re-ranking after vector retrieval meaningfully improves recommendation quality for narrative content because story themes don't compress well into vectors alone"
     ],
-    "githubUrl": "https://github.com/nilanga/storymancer",
+    "githubUrl": "https://github.com/NilangaAbhisheka/-StoryMancer.git",
     "coverImage": "/images/projects/storymancer.png",
     "year": 2026
   },
@@ -217,7 +217,7 @@
       "Riverpod's AsyncNotifier pattern significantly simplified loading/error states for Firestore streams compared to manual StreamBuilder wiring",
       "Push notifications for government announcements need granular opt-in categories — blanket notifications caused high uninstall rates in early testing"
     ],
-    "githubUrl": "https://github.com/nilanga/villageconnect",
+    "githubUrl": "https://github.com/induwara-dissanayake/MAD.git",
     "coverImage": "/images/projects/villageconnect.png",
     "year": 2024,
     "architecture": "Flutter App (Riverpod)\n      │\n      ▼\n  Firebase Auth\n      │\n ┌────┴────┐\n ▼         ▼\nFirestore   FCM\n(real-time) (push)"
@@ -244,7 +244,7 @@
       "Hybrid models consistently outperformed either approach alone on RMSE, but the improvement was largest for cold-start users — validating the weighted fallback strategy",
       "Matrix factorisation hyperparameters (latent dimensions, regularisation) had more impact on recommendation quality than the choice between SVD implementations"
     ],
-    "githubUrl": "https://github.com/nilanga/moviemind",
+    "githubUrl": "https://github.com/NilangaAbhisheka/movie-mind.git",
     "coverImage": "/images/projects/moviemind.png",
     "year": 2023,
     "architecture": "Rating Dataset\n      │\n      ▼\nFeature Engineering\n      │\n ┌────┴─────┐\n ▼          ▼\nSVD CF    Content-Based\n      │\n      ▼\nHybrid Recommender"
@@ -271,7 +271,7 @@
       "ASP.NET Core's built-in SignalR integration is significantly simpler than wiring raw WebSockets, and the automatic reconnection handling improved the auction UX during brief network drops",
       "Storing bid history as an append-only log rather than overwriting the current bid made dispute resolution and audit trails straightforward"
     ],
-    "githubUrl": "https://github.com/nilanga/motormart",
+    "githubUrl": "https://github.com/NilangaAbhisheka/MotorMart.git",
     "coverImage": "/images/projects/motormart.png",
     "year": 2024,
     "architecture": "React Frontend\n      │\n      ▼\nASP.NET Core API\n      │\n SignalR Hub\n      │\n    MySQL"
@@ -298,7 +298,7 @@
       "TypeScript interfaces defined upfront for Event, RSVP, and Organiser types prevented an entire class of prop-drilling bugs during rapid UI iteration",
       "Client-side filtering with useMemo was sufficient for hundreds of events — premature backend pagination would have added complexity without benefit at this scale"
     ],
-    "githubUrl": "https://github.com/nilanga/eventgo",
+    "githubUrl": "https://github.com/Isuruzenith/EventGo.git",
     "coverImage": "/images/projects/eventgo.png",
     "year": 2023,
     "architecture": "Next.js App\n      │\n      ▼\nEvent / RSVP Layer\n      │\nClient State\n(filters, seats)"
