@@ -1,5 +1,55 @@
 [
   {
+    "slug": "cravesdt",
+    "title": "CravesDT",
+    "tagline": "A production-ready bakery POS and management platform powering daily operations through a modern React frontend and NestJS backend.",
+    "description": "A full-stack bakery management platform combining point-of-sale, inventory, production planning, purchasing, customer loyalty, reporting, and business administration into a single web application built with React, NestJS, Prisma, and PostgreSQL.",
+    "longDescription": "CravesDT is a commercial bakery management platform developed for real-world daily operations. Designed as a modern SaaS-ready application, it centralizes every aspect of bakery management—from point-of-sale transactions and inventory tracking to production planning, purchasing, customer management, loyalty programs, financial reporting, and website administration.\n\nThe frontend is built with React 19, TypeScript, and Vite, providing dedicated interfaces for administrators, cashiers, kitchen staff, and customers. Features include a responsive POS interface, outlet management, inventory monitoring, production scheduling, kitchen workflows, sales analytics, customer loyalty management, and a public storefront.\n\nThe backend is powered by NestJS running on Fastify with Prisma ORM and PostgreSQL. It exposes secure REST APIs with JWT authentication, structured request tracing, validation, and automated API documentation. Database migrations, seeding, backup and restore utilities, and Docker-based local deployment streamline development and operations.\n\nBuilt as an npm workspaces monorepo, CravesDT shares code between frontend and backend packages while maintaining clear architectural separation. The platform also integrates receipt printing through a print bridge, enabling seamless in-store operations. Although currently deployed for a single bakery, the architecture was intentionally designed to evolve into a multi-tenant SaaS solution supporting multiple businesses.",
+    "category": [
+      "Full Stack",
+      "Enterprise",
+      "SaaS"
+    ],
+    "featured": true,
+    "technologies": [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "NestJS",
+      "Fastify",
+      "Prisma",
+      "PostgreSQL",
+      "React Query",
+      "Zustand",
+      "Docker",
+      "JWT",
+      "Argon2",
+      "OpenAPI"
+    ],
+    "highlights": [
+      "Production-ready bakery POS actively used in a real business",
+      "Comprehensive management suite covering inventory, production, sales, purchasing, expenses, loyalty, and reporting",
+      "SaaS-ready architecture designed for future multi-tenant deployment",
+      "Integrated receipt printing with desktop print bridge",
+      "Role-based administration with authentication, audit logging, and security management"
+    ],
+    "architecture": "React 19 + Vite Frontend\n      │\n      ▼\nNestJS REST API (Fastify)\n      │\n      ▼\nPrisma ORM\n      │\n      ▼\nPostgreSQL\n      │\n ├── Authentication (JWT)\n ├── Inventory & Products\n ├── POS & Sales\n ├── Production\n ├── Purchasing\n ├── Customer Loyalty\n ├── Reports\n └── Print Bridge",
+    "challenges": [
+      "Designing a scalable architecture capable of supporting multiple bakery branches and future multi-tenant deployments while initially serving a single business",
+      "Keeping inventory, production batches, purchases, and point-of-sale transactions synchronized to maintain accurate stock levels throughout the sales lifecycle",
+      "Integrating reliable receipt printing across Windows environments through a dedicated print bridge while keeping the web application platform-independent"
+    ],
+    "lessonsLearned": [
+      "Developing software for a real business highlighted the importance of reliability, usability, and operational workflows beyond simply implementing features",
+      "Using a monorepo with shared TypeScript packages significantly reduced code duplication and improved consistency between frontend and backend",
+      "Prisma's migration system and type-safe database access greatly simplified schema evolution while reducing runtime errors",
+      "Building a modular NestJS backend made it easier to extend the platform with new business modules without impacting existing functionality"
+    ],
+    "githubUrl": "https://github.com/nilanga/cravesdt",
+    "coverImage": "/images/projects/cravesdt.png",
+    "year": 2025
+  },
+  {
     "slug": "spendwise",
     "title": "SpendWise",
     "tagline": "Predicts personal spending patterns using machine learning and flags anomalies in real time.",
@@ -225,33 +275,6 @@
     "coverImage": "/images/projects/motormart.png",
     "year": 2024,
     "architecture": "React Frontend\n      │\n      ▼\nASP.NET Core API\n      │\n SignalR Hub\n      │\n    MySQL"
-  },
-  {
-    "slug": "grade-predictor",
-    "title": "Student Grade Predictor",
-    "tagline": "Predicts academic performance using regression models trained on attendance, assignment scores, and prior grades.",
-    "description": "A machine learning system that predicts student end-of-term grades using linear regression and feature engineering over academic input data.",
-    "longDescription": "The Student Grade Predictor applies supervised learning to an educational analytics problem: can mid-term indicators predict final grades accurately enough to trigger early intervention? The dataset combines attendance percentages, assignment scores, midterm exam results, and prior semester GPA as input features.\n\nFeature engineering created derived signals — assignment score trend (improving vs declining), attendance consistency (standard deviation of weekly attendance), and a weighted composite score combining all inputs. Three regression models were compared: simple linear regression, ridge regression (L2 regularisation), and polynomial regression (degree 2).\n\nModels were evaluated with k-fold cross-validation using RMSE and R² metrics. Predicted vs actual grade scatter plots and residual analysis visualisations help instructors identify which students are at risk of underperforming relative to their mid-term trajectory.",
-    "category": ["AI/ML", "Academic"],
-    "featured": false,
-    "technologies": ["Python", "Scikit-learn", "Pandas", "Linear Regression"],
-    "highlights": [
-      "Feature engineering from attendance, assignment, and midterm scores",
-      "Multiple regression models with cross-validation and RMSE comparison",
-      "Visual performance analysis with predicted vs actual grade plots"
-    ],
-    "challenges": [
-      "Small dataset size (~200 students) made complex models prone to overfitting — ridge regularisation was necessary to generalise",
-      "Missing attendance records for some students required an imputation strategy that didn't bias predictions toward either high or low attendance"
-    ],
-    "lessonsLearned": [
-      "Ridge regression with cross-validated alpha selection outperformed both plain linear and polynomial regression on RMSE — the dataset was too small for higher-degree polynomials to generalise",
-      "Attendance consistency (low variance) was a stronger predictor than raw attendance percentage alone, which wasn't obvious before feature engineering"
-    ],
-    "githubUrl": "https://github.com/nilanga/grade-predictor",
-    "coverImage": "/images/projects/grade-predictor.png",
-    "year": 2023,
-    "architecture": "Student Dataset\n      │\n      ▼\nFeature Engineering\n      │\n ┌────┴────┐\n ▼         ▼\nLinear     Ridge\nRegression Regression\n      │\n      ▼\nPredictions + Charts"
   },
   {
     "slug": "eventgo",

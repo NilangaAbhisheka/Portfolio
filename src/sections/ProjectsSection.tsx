@@ -10,11 +10,13 @@ import ProjectModal from '@/components/shared/ProjectModal';
 
 const categories: Array<ProjectCategory | 'All'> = [
   'All',
+  'Full Stack',
   'AI/ML',
   'Backend',
   'Frontend',
   'Mobile',
   'Enterprise',
+  'SaaS',
   'Academic',
 ];
 

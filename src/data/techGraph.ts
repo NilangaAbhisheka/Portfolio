@@ -20,7 +20,7 @@ export const techGraph: TechGraphData = {
       isCore: true,
       description:
         'Primary UI library for enterprise dashboards, admin systems, and full-stack web applications.',
-      projects: ['Warehouse Management System', 'EduManager', 'EventGo'],
+      projects: ['CravesDT', 'Warehouse Management System', 'EduManager', 'EventGo'],
       achievements: ['Built 5+ production React applications', 'Complex state management with Redux Toolkit'],
     },
     {
@@ -31,7 +31,7 @@ export const techGraph: TechGraphData = {
       isCore: true,
       description:
         'Strongly typed development across React, Next.js, and Node.js backends for safer, scalable codebases.',
-      projects: ['EduManager', 'Warehouse Management System'],
+      projects: ['CravesDT', 'EduManager', 'Warehouse Management System'],
       achievements: ['End-to-end type safety in full-stack projects'],
     },
     {
@@ -64,7 +64,7 @@ export const techGraph: TechGraphData = {
       isCore: true,
       description:
         'Relational database for transactional systems, financial data, and structured application state.',
-      projects: ['SpendWise', 'MotorMart'],
+      projects: ['CravesDT', 'SpendWise', 'MotorMart'],
       achievements: ['Schema design for finance and enterprise data'],
     },
     {
@@ -75,7 +75,7 @@ export const techGraph: TechGraphData = {
       isCore: true,
       description:
         'Containerization for reproducible dev environments, CI/CD pipelines, and service deployment.',
-      projects: ['EduManager', 'SpendWise'],
+      projects: ['CravesDT', 'EduManager', 'SpendWise'],
       achievements: ['Multi-service Docker Compose setups', 'CI/CD container builds'],
     },
 
@@ -105,7 +105,32 @@ export const techGraph: TechGraphData = {
       projects: ['Warehouse Management System', 'EduManager'],
     },
 
+    {
+      id: 'Vite',
+      group: 'Frontend',
+      level: 82,
+      years: 2,
+      description: 'Fast build tool and dev server for modern React applications.',
+      projects: ['CravesDT'],
+    },
+    {
+      id: 'Zustand',
+      group: 'Frontend',
+      level: 76,
+      years: 2,
+      description: 'Lightweight state management for React with minimal boilerplate.',
+      projects: ['CravesDT', 'TraceIQ'],
+    },
+
     // Backend
+    {
+      id: 'NestJS',
+      group: 'Backend',
+      level: 84,
+      years: 2,
+      description: 'Progressive Node.js framework for scalable enterprise APIs with modular architecture.',
+      projects: ['CravesDT'],
+    },
     {
       id: 'Python',
       group: 'Backend',
@@ -137,6 +162,16 @@ export const techGraph: TechGraphData = {
       years: 1,
       description: 'Microsoft web framework for enterprise APIs and marketplace platforms.',
       projects: ['MotorMart'],
+    },
+
+    // ORM
+    {
+      id: 'Prisma',
+      group: 'Database',
+      level: 80,
+      years: 2,
+      description: 'Type-safe ORM with migration management for PostgreSQL-backed applications.',
+      projects: ['CravesDT'],
     },
 
     // Database
@@ -334,6 +369,14 @@ export const techGraph: TechGraphData = {
     // Mobile
     { source: 'React Native', target: 'React', strength: 2 },
     { source: 'Firebase', target: 'Flutter', strength: 1.5 },
+
+    // NestJS / Prisma
+    { source: 'NestJS', target: 'Node.js', strength: 2 },
+    { source: 'NestJS', target: 'TypeScript', strength: 2 },
+    { source: 'NestJS', target: 'Prisma', strength: 2 },
+    { source: 'Prisma', target: 'PostgreSQL', strength: 2 },
+    { source: 'Vite', target: 'React', strength: 2 },
+    { source: 'Zustand', target: 'React', strength: 1.5 },
 
     // Cross-domain
     { source: 'TypeScript', target: 'Node.js', strength: 1.5 },

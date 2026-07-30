@@ -2,8 +2,10 @@ export type ProjectCategory =
   | 'AI/ML'
   | 'Backend'
   | 'Frontend'
+  | 'Full Stack'
   | 'Mobile'
   | 'Enterprise'
+  | 'SaaS'
   | 'Academic';
 
 export interface Project {

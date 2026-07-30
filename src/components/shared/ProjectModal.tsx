@@ -9,10 +9,12 @@ import type { Project } from '@/types';
 
 const categoryColors: Record<string, string> = {
   'AI/ML': 'bg-[#8b5cf6]/15 text-[#a78bfa] border-[#8b5cf6]/30',
+  'Full Stack': 'bg-[#14b8a6]/15 text-[#2dd4bf] border-[#14b8a6]/30',
   Backend: 'bg-[#3b82f6]/15 text-[#60a5fa] border-[#3b82f6]/30',
   Frontend: 'bg-[#06b6d4]/15 text-[#22d3ee] border-[#06b6d4]/30',
   Mobile: 'bg-[#10b981]/15 text-[#34d399] border-[#10b981]/30',
   Enterprise: 'bg-[#f59e0b]/15 text-[#fbbf24] border-[#f59e0b]/30',
+  SaaS: 'bg-[#f43f5e]/15 text-[#fb7185] border-[#f43f5e]/30',
   Academic: 'bg-[#a1a1aa]/15 text-[#d4d4d8] border-[#a1a1aa]/30',
 };
 
